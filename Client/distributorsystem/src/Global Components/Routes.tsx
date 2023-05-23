@@ -15,6 +15,7 @@ import DistributorOrderForm from "../Components/Product Distribution/Distributor
 import DealerOrderForm from "../Components/Product Distribution/DealerOrderForm";
 import DealaerProfile from "../Components/Profiles/DealerProfile";
 import SignIn from "../Components/Sign-in/SignInScreen";
+import OrderConfirmation from "../Components/Product Distribution/OrderConfirmartion";
 export default function MainRoutes(){
     return(
         <Routes>
@@ -25,7 +26,7 @@ export default function MainRoutes(){
                 <Route path="/paymentList" element={<PaymentList/>}/>
                 <Route path="/dealearOrderForm" element={<DealerOrderForm/>}/>
                 <Route path="/distributorOrderForm" element={<DistributorOrderForm/>}/>
-                {/* <Route path="/orderConfirmation" element={<orderConfirmation/>}/> */}
+                <Route path="/orderConfirmation" element={<OrderConfirmation/>}/>
                 {/* <Route path="/dealerTransactionDetails" element={<DealerTransactionDetails/>}/> */}
                 {/* <Route path="/productDistributionList" element={<ProductDistributionList/>}/> */}
                 <Route path="/dealerProfileDetails" element={<DealaerProfile/>}/>
