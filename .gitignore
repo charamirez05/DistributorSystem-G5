@@ -128,3 +128,26 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+
+# Express.js
+.env
+
+# Sequelize
+config/config.json
+migrations/
+seeders/
+
+# MySQL
+*.log
+*.sql
+
+# Cors
+# If you generated any specific files related to Cors, add them here
+
+# Other common entries
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
