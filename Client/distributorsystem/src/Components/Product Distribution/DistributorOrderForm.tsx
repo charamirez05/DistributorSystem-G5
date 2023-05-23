@@ -34,6 +34,7 @@ export default function distributorOrderForm(){
     return( 
         <>
         <div>
+                <h1>sadaws</h1>
         <NavBar moduleName=''/>
          <div style={{marginLeft:"50px", marginTop:"20px",marginRight:"50px", marginBottom:"20px"}}>
          <h1 style={{color:"White", fontFamily:"Verdana"}}>Product Distribution Form</h1>
