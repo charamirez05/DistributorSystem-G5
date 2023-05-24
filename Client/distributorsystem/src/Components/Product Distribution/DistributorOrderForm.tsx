@@ -1,41 +1,95 @@
 import NavBar from '../../Global Components/NavBar';
+import React, { useState } from 'react';
 import {TextField, Typography, Grid, Card, Button, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Select, MenuItem, Autocomplete} from "@mui/material";
 
-function createData(
-    quantity: number,
-    unit: string,
-    productName: string,
-    unitPrice: number,
-    commissionRate: number,
-    amount:number
-  ) {
-    return { quantity, unit, productName, unitPrice, commissionRate, amount };
+interface Product{
+  id: number;
+  name: string;
+}
+
+interface createData{
+    id: number;
+    quantity: number;
+    unit: string;
+    product: Product | null;
+    unitPrice: number;
+    commissionRate: number;
+    amount:number;
   }
-
-  const rows = [
-    createData(5, 'piece', 'Lotion (90 mL)', 500, 9, 2750),
-    createData(5, 'box', 'Perfume (120 mL)', 500, 9, 2750),
-    createData(5, 'piece', 'toothpaste (150 g tube)', 500, 9, 2750),
-    createData(5, 'piece', 'Shampoo (20 mL)', 500, 9, 2750),
-    createData(5, 'piece', 'Conditioner (20 mL)', 500, 9, 2750),
-  ];
-
-  const top100Films = [
-    { label: 'The Shawshank Redemption', year: 1994 },
-    { label: 'The Godfather', year: 1972 },
-    { label: 'The Godfather: Part II', year: 1974 },
-    { label: 'The Dark Knight', year: 2008 },
-    { label: '12 Angry Men', year: 1957 },
-];
 
   
 
-export default function distributorOrderForm(){
+ 
+
+const products: Product[] = [
+  { id: 1, name: 'Product A' },
+  { id: 2, name: 'Product B' },
+  { id: 3, name: 'Product C' },
+];
+  
+
+export default function DistributorOrderForm(){
+  const [tableData, setTableData] = useState<createData[]>([]);
+
+  const [quantity, setQuantity] = useState(0);
+  const [unit, setUnit] = useState('')
+  const [unitPrice, setUnitPrice] = useState(0);
+  const [commissionRate, setCommissionRate] = useState(0);
+  const [amount, setAmount] = useState(0);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+   const handleUnitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setUnit(event.target.value);
+    };
+    
+   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setQuantity(Number(event.target.value));
+    };
+     const handleUnitPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setUnitPrice(Number(event.target.value));
+    };
+    const handleProductChange = (event: React.ChangeEvent<{}>, value: Product | null) => {
+      setSelectedProduct(value);
+    };
+     const handleComissionRate = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setCommissionRate(Number(event.target.value));
+    };
+     const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setAmount(Number(event.target.value));
+    };
+
+    const handleAddRow = () => {
+      const newRow: createData = {
+        id: tableData.length +1,
+        quantity: quantity,
+        unit: unit,
+        product: selectedProduct,
+        unitPrice: unitPrice,
+        commissionRate: commissionRate,
+        amount: amount,
+
+      };
+
+      setTableData([...tableData, newRow]);
+      setSelectedProduct(null);
+      setQuantity(0);
+      setUnit('');
+      setUnitPrice(0);
+      setCommissionRate(0);
+      setAmount(0);
+      
+    }
+
+
+
+
     return( 
         <>
+        <h1 style={{color:"White", fontFamily:"Verdana", textAlign: "left", marginLeft: "20px"}}>Product Distribution Form</h1>
         <div>
+        
          <div style={{marginLeft:"50px", marginTop:"20px",marginRight:"50px", marginBottom:"20px"}}>
-         <h1 style={{color:"White", fontFamily:"Verdana"}}>Product Distribution Form</h1>
+         
          <Grid container spacing = {4} sx={{display:"flex", justifyContent: "center"}}>
             <Grid item>
         <Typography sx={{color:"white"}}>Dealer ID</Typography>
@@ -70,16 +124,17 @@ export default function distributorOrderForm(){
         <Grid container spacing = {3} sx={{display:"flex", justifyContent: "center"}}>
         <Grid item>
         <Typography sx={{color:"#146C94"}}>Product Name</Typography>
-        <Autocomplete disablePortal id="flat-demo" options={top100Films}  sx={{ background:"#AFD3E2", borderRadius: 20, width: 210, height: 40, input:{ color:"#156D94"} }} renderInput={(params) => <TextField {...params} variant='standard' InputProps={{
+        <Autocomplete disablePortal id="flat-demo" options={products} getOptionLabel={(option) => option.name} value={selectedProduct}
+        onChange={handleProductChange} sx={{ background:"#AFD3E2", borderRadius: 20, width: 210, height: 40, input:{ color:"#156D94"} }} renderInput={(params) => <TextField {...params} variant='standard' InputProps={{
                             ...params.InputProps, disableUnderline: true}} sx={{ paddingLeft:"5px",paddingTop:"5px",input:{padding:"10px", color:"white"}}} />}/>
         </Grid>
         <Grid item>
         <Typography sx={{color:"#146C94"}}>Quantity</Typography>
-      <TextField id="standard-basic" variant="standard" InputProps={{ disableUnderline: true }} sx={{background:"#AFD3E2", borderRadius: 20, input:{
+      <TextField id="standard-basic" variant="standard"  value={quantity} onChange={handleQuantityChange} InputProps={{ disableUnderline: true }} sx={{background:"#AFD3E2", borderRadius: 20, input:{
         padding: "10px", color:"white"}}} />
         </Grid>
         <Grid item>
-        <Button variant='contained' style={{maxWidth: '200px', maxHeight: '50px', minWidth: '200px', minHeight: '50px', borderRadius: 20, background: "#2A9221"}}>Add to Cart</Button>
+        <Button variant='contained' onClick={handleAddRow} style={{maxWidth: '200px', maxHeight: '50px', minWidth: '200px', minHeight: '50px', borderRadius: 20, background: "#2A9221"}}>Add to Cart</Button>
         <Box sx={{ m: 3 }} /> 
         <Button variant='contained' style={{maxWidth: '200px', maxHeight: '50px', minWidth: '200px', minHeight: '50px', borderRadius: 20, background: "#E77D7D"}}>Remove Item</Button>
         </Grid>
@@ -101,13 +156,13 @@ export default function distributorOrderForm(){
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {tableData.map((row) => (
             <TableRow
          
             >
               <TableCell align='center' sx={{color:"#156D94",borderRight: "3px #AFD3E2 solid"}} >{row.quantity}</TableCell>
               <TableCell align='center' sx={{color:"#156D94",borderRight: "3px #AFD3E2 solid"}}>{row.unit}</TableCell>
-              <TableCell align='center' sx={{color:"#156D94",borderRight: "3px #AFD3E2 solid"}}>{row.productName}</TableCell>
+              <TableCell align='center' sx={{color:"#156D94",borderRight: "3px #AFD3E2 solid"}}>{row.product?.name}</TableCell>
               <TableCell align='center' sx={{color:"#156D94",borderRight: "3px #AFD3E2 solid"}}>{row.unitPrice}</TableCell>
               <TableCell align='center' sx={{color:"#156D94",borderRight: "3px #AFD3E2 solid"}}>{row.commissionRate}</TableCell>
               <TableCell align='center' sx={{color:"#156D94",borderRight: "3px #AFD3E2 solid"}}>{row.amount}</TableCell>
