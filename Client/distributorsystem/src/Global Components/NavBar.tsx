@@ -11,7 +11,6 @@ import ScheduleOrderTransaction from '../Components/Schedules/ScheduleOrderTrans
 import AssignmentList from '../Components/Collector Assignment/AssignmentList';
 
 
-
 type navProps = {
     moduleName: string;
 }
@@ -79,6 +78,7 @@ export default function NavBar(props: navProps) {
                         <Link to="/dealerRegistration"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Dealer Registration</Button></Link>
                         <Link to="/assignmentCollector"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Assignment Collector</Button></Link>
 
+                        <Link to="/distributorOrderForm"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Distributor Order Form</Button></Link>
                         <Link to="/paymentSummary"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Payment Summary</Button></Link>
                         <Link to="/paymentList"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Payment List</Button></Link>
                         <Link to="/recordDirectPayment"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Record Direct Payment</Button></Link>
