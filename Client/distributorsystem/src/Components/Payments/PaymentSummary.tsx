@@ -52,7 +52,7 @@ export default function PaymentSummary() {
 
     if (paymentType.match("Direct"))
         return <div>
-            <NavBar moduleName="Payments" />
+        
             <ScreenLabel>
                 Payment Summary
             </ScreenLabel>
