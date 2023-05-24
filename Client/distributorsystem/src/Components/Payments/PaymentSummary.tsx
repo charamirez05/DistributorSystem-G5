@@ -171,7 +171,6 @@ export default function PaymentSummary() {
 
 
     return <div>
-        <NavBar moduleName="Payments" />
         <ScreenLabel>
             Payment Summary
         </ScreenLabel>
