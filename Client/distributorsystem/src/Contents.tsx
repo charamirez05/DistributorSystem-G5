@@ -9,7 +9,7 @@ export default function Content() {
     const path=location.pathname;
     const navPageMapping: Record<string,string>={
         '/dashboard':'Dashboard',
-        '/assignmentCollector':'Assignment Collector',
+        '/assignmentCollector':'Collector Assignment',
         '/dealerRegistration':'Dealer Registration'
     };
     const navpage=navPageMapping[path] || 'Unknown';
