@@ -19,6 +19,7 @@ export default function Content() {
         '/paymentSummary':'Payment Summary',
         '/recordDirectPayment':'Record Direct Payment',
         
+
     };
     const navpage=navPageMapping[path] || 'Unknown';
     return navpage;
