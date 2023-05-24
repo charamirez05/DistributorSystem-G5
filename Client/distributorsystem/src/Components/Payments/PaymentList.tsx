@@ -214,7 +214,7 @@ export default function PaymentList() {
     });
 
     return (<div>
-        <NavBar moduleName="Payments" />
+    
 
 
         <Grid
