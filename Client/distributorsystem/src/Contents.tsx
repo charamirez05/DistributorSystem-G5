@@ -13,7 +13,7 @@ export default function Content() {
         '/dealerRegistration':'Dealer Registration',
 
         '/distributorOrderForm':'Distribution Order Form',
-        '/orderConfirmation': 'Order Confrimation'
+        '/orderConfirmation': 'Order Confrimation',
 
         '/paymentList':'Payment List',
         '/paymentSummary':'Payment Summary',
