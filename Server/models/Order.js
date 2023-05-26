@@ -9,7 +9,6 @@ class Order extends Model {
       as: 'orderedProducts'
     });
   }
-
   async addOrderedProduct(orderedProduct) {
     await this.createOrderedProduct(orderedProduct); // Use the generated Sequelize method to create an ordered product
   }
@@ -32,7 +31,9 @@ Order.init(
       allowNull: false,
     },
     penaltyRate: {
+
       type: DataTypes.FLOAT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     paymentTerms: {

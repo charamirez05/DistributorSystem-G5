@@ -27,6 +27,11 @@ OrderedProduct.init(
     },
     subTotal: {
       type: DataTypes.DOUBLE,
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    subTotal: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     productID: {

@@ -15,6 +15,11 @@ import DistributorOrderForm from "../Components/Product Distribution/Distributor
 import DealerOrderForm from "../Components/Product Distribution/DealerOrderForm";
 import DealaerProfile from "../Components/Profiles/DealerProfile";
 import SignIn from "../Components/Sign-in/SignInScreen";
+
+import OrderConfirmation from "../Components/Product Distribution/OrderConfirmartion";
+
+import RecordDirectPayment from "../Components/Payments/RecordDirectPayment";
+
 export default function MainRoutes(){
     return(
         <Routes>
@@ -23,9 +28,11 @@ export default function MainRoutes(){
                 <Route path="/dashboard" element={<Dashboard/>}/>
                 <Route path="/assignmentCollector" element={<AssignmentList/>}/>
                 <Route path="/paymentList" element={<PaymentList/>}/>
+                <Route path="/paymentSummary" element={<PaymentSummary/>}/>
+                <Route path="/recordDirectPayment" element={<RecordDirectPayment/>}/>
                 <Route path="/dealearOrderForm" element={<DealerOrderForm/>}/>
                 <Route path="/distributorOrderForm" element={<DistributorOrderForm/>}/>
-                {/* <Route path="/orderConfirmation" element={<orderConfirmation/>}/> */}
+                <Route path="/orderConfirmation" element={<OrderConfirmation/>}/>
                 {/* <Route path="/dealerTransactionDetails" element={<DealerTransactionDetails/>}/> */}
                 {/* <Route path="/productDistributionList" element={<ProductDistributionList/>}/> */}
                 <Route path="/dealerProfileDetails" element={<DealaerProfile/>}/>

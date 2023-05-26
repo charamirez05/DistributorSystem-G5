@@ -37,6 +37,15 @@ Product.init(
     },
     commissionRate: {
       type: DataTypes.FLOAT,
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    productPrice: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    commissionRate: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

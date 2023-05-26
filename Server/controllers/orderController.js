@@ -1,7 +1,7 @@
 const Order = require('../models/Order');
 const OrderedProduct = require('../models/orderedProduct')
 const Product = require('../models/Product')
-// Example API endpoint
+
 const createOrder = async (req, res) => {
   try {
     const distributionDate = req.body.distributionDate;
