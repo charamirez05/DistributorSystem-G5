@@ -10,9 +10,6 @@ class Product extends Model {
     });
   }
 
-  async addOrderedProduct(orderedProduct) {
-    await this.createOrderedProduct(orderedProduct); // Use the generated Sequelize method to create an ordered product
-  }
 }
 
 Product.init(
