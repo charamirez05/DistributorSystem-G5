@@ -17,55 +17,15 @@ app.use(cors());
 });
  */
 
-const Sequelize = require('sequelize');
-
-
-const sequelize = new Sequelize('sql12619695', 'sql12619695', '2ANG8tNXa7', {
-  host: 'sql12.freemysqlhosting.net',
-  dialect: 'mysql',
-});
-
-
-const User = sequelize.define('User', {
-  firstName: {
-    type: Sequelize.STRING,
-  },
-  lastName: {
-    type: Sequelize.STRING,
-  },
-}, {
-  // Disabling createdAt and updatedAt fields
-  timestamps: false,
-});
-
-const Product = sequelize.define('Product', {
-  productname: {
-    type: Sequelize.STRING,
-  },
-  productprice: {
-    type: Sequelize.STRING,
-  },
-}, {
-  // Disabling createdAt and updatedAt fields
-  timestamps: false,
-}
-);
-
-const Order = sequelize.define('Product', {
-  ordername: {
-    type: Sequelize.STRING,
-  },
-  ordertype: {
-    type: Sequelize.STRING,
-  },
-},
-  {
-    // Disabling createdAt and updatedAt fields
-    timestamps: false,
-  });
-
-
-sequelize.sync({ alter: true })
+// Set up your API routes
+app.post('/users', userController.createUser);
+app.post('/orders', orderController.createOrder);
+app.post('/products', productController.createProduct);
+app.post('/orderedProduct', orderedProductController.createOrderedProduct);
+app.get('/products/getAllProducts', productController.getAllProducts);
+// Sync the database and start the server
+sequelize
+  .sync({ alter: true })
   .then(() => {
     console.log('Database tables created');
   })
