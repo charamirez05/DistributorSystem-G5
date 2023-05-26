@@ -9,7 +9,6 @@ class Order extends Model {
       as: 'orderedProducts'
     });
   }
-  
   async addOrderedProduct(orderedProduct) {
     await this.createOrderedProduct(orderedProduct); // Use the generated Sequelize method to create an ordered product
   }
@@ -23,17 +22,31 @@ Order.init(
       primaryKey: true,
       autoIncrement: true
     },
+    orderDate: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     distributionDate: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     penaltyRate: {
+
+      type: DataTypes.FLOAT,
       type: DataTypes.STRING,
       allowNull: false,
     },
     paymentTerms: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    orderAmount: {
+      type: DataTypes.DOUBLE,
+      allowNull: true,
+    },
+    collectorStatus: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
     },
   },
   {
@@ -44,4 +57,3 @@ Order.init(
 );
 
 module.exports = Order;
-//random

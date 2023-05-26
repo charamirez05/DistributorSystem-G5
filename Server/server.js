@@ -1,5 +1,8 @@
 const express = require('express');
 const cors = require('cors');
+app.use(express.json());
+app.use(cors());
+
 const sequelize = require('./config');
 const userController = require('./controllers/userController');
 const orderController = require('./controllers/orderController');
@@ -18,7 +21,9 @@ app.post('/users', userController.createUser);
 app.post('/orders', orderController.createOrder);
 app.post('/products', productController.createProduct);
 app.post('/orderedProduct', orderedProductController.createOrderedProduct);
-app.get('/products', productController.getAllProducts);
+app.get('/products/getAllProducts', productController.getAllProducts);
+
+
 // Sync the database and start the server
 sequelize
   .sync({ alter: true })

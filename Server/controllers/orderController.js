@@ -1,13 +1,47 @@
 const Order = require('../models/Order');
+const OrderedProduct = require('../models/orderedProduct')
+const Product = require('../models/Product')
 
-// Example API endpoint
 const createOrder = async (req, res) => {
   try {
     const distributionDate = req.body.distributionDate;
+    const orderDate = req.body.orderDate;
     const penaltyRate = req.body.penaltyRate;
     const paymentTerms = req.body.paymentTerms;
-    const order = await Order.create({ distributionDate, penaltyRate, paymentTerms});
-    res.json(order);
+    const collectorStatus = req.body.collectorStatus;
+
+    const orderedProducts = req.body.orderedProducts;
+
+    const order = await Order.create({ distributionDate, orderDate, penaltyRate, paymentTerms});
+
+    const orderID = order.orderID;
+
+    let orderAmount = 0;
+
+    for (const productInfo of orderedProducts) {
+      const productID = productInfo && productInfo.productID;
+      const quantity = productInfo && productInfo.quantity;
+      
+      const product = await Product.findByPk(productID);
+
+      if (product) {
+        const productPrice = product.productPrice;
+        const productUnit = product.productUnit;
+        const subTotal = productPrice * quantity;
+    
+        const orderedProduct = await OrderedProduct.create({
+          productID,
+          quantity,
+          subTotal,
+          orderID,
+        });
+        
+        orderAmount += subTotal; //dili mogana ang subTotal
+      }
+    }
+    
+    const updatedOrder= await Order.update({ orderAmount: orderAmount }, { where: { orderID: orderID } });
+    res.json(updatedOrder);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Server error' });

@@ -22,6 +22,11 @@ OrderedProduct.init(
       autoIncrement: true
     },
     quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    subTotal: {
+      type: DataTypes.DOUBLE,
       type: DataTypes.STRING,
       allowNull: false,
     },

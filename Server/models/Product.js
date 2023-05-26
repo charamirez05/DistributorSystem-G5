@@ -28,6 +28,15 @@ Product.init(
       allowNull: false,
     },
     productUnit: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    productPrice: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    commissionRate: {
+      type: DataTypes.FLOAT,
       type: DataTypes.STRING,
       allowNull: false,
     },
