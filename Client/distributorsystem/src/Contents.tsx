@@ -10,7 +10,11 @@ export default function Content() {
     const navPageMapping: Record<string,string>={
         '/dashboard':'Dashboard',
         '/assignmentCollector':'Assignment Collector',
-        '/dealerRegistration':'Dealer Registration'
+        '/dealerRegistration':'Dealer Registration',
+        '/schedules':'Payment Transaction Schedule',
+        '/orderTransactionDetails': 'Order Transaction Details',
+        '/paymentList': 'Payment Lists',
+        '/recordDirectPayment': 'Record Direct Payment'
     };
     const navpage=navPageMapping[path] || 'Unknown';
     return navpage;
