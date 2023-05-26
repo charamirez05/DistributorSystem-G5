@@ -47,7 +47,7 @@ Product.init(
   },
   {
     sequelize,
-    modelName: 'Products', // The name of the model, which will be used as the table name
+    modelName: 'Product', // The name of the model, which will be used as the table name
     timestamps: false,
   }
 );
