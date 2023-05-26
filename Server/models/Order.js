@@ -49,7 +49,7 @@ Order.init(
   },
   {
     sequelize,
-    modelName: 'Orders', // The name of the model, which will be used as the table name
+    modelName: 'Order', // The name of the model, which will be used as the table name
     timestamps: false,
   }
 );
