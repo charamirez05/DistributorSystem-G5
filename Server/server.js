@@ -3,6 +3,7 @@ const cors = require('cors');
 
 
 const sequelize = require('./config');
+
 const orderController = require('./controllers/orderController');
 const productController = require('./controllers/productController');
 const orderedProductController = require('./controllers/orderedProductController');
@@ -15,6 +16,7 @@ app.use(cors());
 
 
 // Set up your API routes
+
 app.post('/orders', orderController.createOrder);
 app.post('/products', productController.createProduct);
 app.post('/orderedProduct', orderedProductController.createOrderedProduct);
