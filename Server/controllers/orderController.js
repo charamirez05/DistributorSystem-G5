@@ -8,11 +8,11 @@ const createOrder = async (req, res) => {
     const orderDate = req.body.orderDate;
     const penaltyRate = req.body.penaltyRate;
     const paymentTerms = req.body.paymentTerms;
-    const collectorStatus = req.body.collectorStatus;
+    const collectorID = req.body.collectorID;
 
     const orderedProducts = req.body.orderedProducts;
 
-    const order = await Order.create({ distributionDate, orderDate, penaltyRate, paymentTerms});
+    const order = await Order.create({ distributionDate, orderDate, penaltyRate, paymentTerms, collectorID});
 
     const orderID = order.orderID;
 

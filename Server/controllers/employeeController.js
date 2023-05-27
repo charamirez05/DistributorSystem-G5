@@ -51,7 +51,23 @@ const getAllCollectors = async (req, res) => {
     }
   };
 
+const getCollectorByID = async (req, res) => {
+    try {
+      const collector = await Employee.findOne({
+        where: {
+            isCollector: true,
+            employeeID: req.params.employeeID
+        }
+      });
+  
+      res.json(collector);
+    } catch (error) {
+      console.error('Error retrieving collectors:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
 
 module.exports = {
-    createEmployee, getAllEmployees, getAllCollectors
+    createEmployee, getAllEmployees, getAllCollectors, getCollectorByID
 };

@@ -10,7 +10,7 @@ import PaymentList from "../Components/Payments/PaymentList";
 import DealerRegistration from "../Components/Registration/DealerRegistration";
 import EmployeeRegistration from "../Components/Registration/EmployeeRegistration";
 import ScheduleOrderTransaction from "../Components/Schedules/ScheduleOrderTransaction";
-import Content from "../Contents";
+
 import DistributorOrderForm from "../Components/Product Distribution/DistributorOrderForm";
 import DealerOrderForm from "../Components/Product Distribution/DealerOrderForm";
 import DealaerProfile from "../Components/Profiles/DealerProfile";
@@ -19,6 +19,8 @@ import SignIn from "../Components/Sign-in/SignInScreen";
 import OrderConfirmation from "../Components/Product Distribution/OrderConfirmartion";
 
 import RecordDirectPayment from "../Components/Payments/RecordDirectPayment";
+import Content from "./Contents";
+import DataGridOrder from "../Components/Collector Assignment/DateGridOrder";
 
 export default function MainRoutes(){
     return(
@@ -26,7 +28,7 @@ export default function MainRoutes(){
             <Route path="/" element={<Content/>}>
                 <Route path="/" element={<Navigate replace to="dashboard"/>}/>
                 <Route path="/dashboard" element={<Dashboard/>}/>
-                <Route path="/assignmentCollector" element={<AssignmentList/>}/>
+                <Route path="/assignmentCollector" element={<DataGridOrder/>}/>
                 <Route path="/paymentList" element={<PaymentList/>}/>
                 <Route path="/paymentSummary" element={<PaymentSummary/>}/>
                 <Route path="/recordDirectPayment" element={<RecordDirectPayment/>}/>

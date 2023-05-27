@@ -10,13 +10,13 @@ export interface IOrderedProducts {
 
 export interface IOrder {
     orderID: number,
-    distributionDate: string;
-    orderDate: string;
-    penaltyRate: number;
-    paymentTerms: string;
+    distributionDate: string,
+    orderDate: string,
+    penaltyRate: number,
+    paymentTerms: string,
     orderAmount:number,
-    collectorID: number;
-    orderedProducts: IOrderedProducts[];
+    orderedProducts: IOrderedProducts[],
+    collectorID: number
 }
 
 

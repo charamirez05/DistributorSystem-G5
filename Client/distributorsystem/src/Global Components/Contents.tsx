@@ -1,6 +1,6 @@
 import React from 'react';
 import {Outlet, useLocation} from 'react-router-dom';
-import NavBar from './Global Components/NavBar';
+import NavBar from './NavBar';
 
 
 export default function Content() {

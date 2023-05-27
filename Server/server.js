@@ -30,6 +30,7 @@ app.post('/orderedProduct', orderedProductController.createOrderedProduct);
 app.post('/employee', employeeController.createEmployee);
 app.get('/employee/getAllEmployees', employeeController.getAllEmployees)
 app.get('/employee/getAllCollectors', employeeController.getAllCollectors)
+app.get('/employee/getCollector/:employeeID', employeeController.getCollectorByID)
 
 
 
