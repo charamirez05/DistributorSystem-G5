@@ -1,6 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config.js');
 const OrderedProduct = require('./orderedProduct.js');
+const Employee = require('./Employee.js');
 
 class Order extends Model {
   static associate(models) {
@@ -8,8 +9,9 @@ class Order extends Model {
       foreignKey: 'orderID',
       as: 'orderedProducts'
     });
+    Order.belongsTo(Employee, {foreignKey: 'employeeID',
+        as: 'employee'}); 
   }
-
 }
 
 Order.init(
@@ -18,7 +20,7 @@ Order.init(
     orderID: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     orderDate: {
       type: DataTypes.STRING,
@@ -29,9 +31,7 @@ Order.init(
       allowNull: false,
     },
     penaltyRate: {
-
       type: DataTypes.FLOAT,
-      type: DataTypes.STRING,
       allowNull: false,
     },
     paymentTerms: {
@@ -42,10 +42,15 @@ Order.init(
       type: DataTypes.DOUBLE,
       allowNull: true,
     },
-    collectorStatus: {
-      type: DataTypes.BOOLEAN,
+    collectorID: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Employees',
+        key: 'employeeID',
+      },
       allowNull: true,
     },
+     //collector nalang ni tapos if null kay meaning ana wala pa siya na assignnan og collector
   },
   {
     sequelize,

@@ -12,7 +12,11 @@ import AssignmentList from '../Components/Collector Assignment/AssignmentList';
 
 
 type navProps = {
+<<<<<<< Updated upstream
     moduleName: string;
+=======
+  moduleName: string;
+>>>>>>> Stashed changes
 }
 export default function NavBar(props: navProps) {
     const[isOpen, setOpen]=useState(false)

@@ -10,7 +10,6 @@ class OrderedProduct extends Model {
         OrderedProduct.belongsTo(Order, {foreignKey: 'orderID',
         as: 'order'}); 
       } 
-
 }
 
 OrderedProduct.init(
@@ -27,11 +26,6 @@ OrderedProduct.init(
     },
     subTotal: {
       type: DataTypes.DOUBLE,
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    subTotal: {
-      type: DataTypes.STRING,
       allowNull: false,
     },
     productID: {
