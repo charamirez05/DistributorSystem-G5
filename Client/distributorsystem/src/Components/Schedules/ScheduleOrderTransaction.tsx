@@ -104,7 +104,6 @@ const TableHeaderCell = styled(TableCell)({
 export default function Schedules(){
     return( 
         <div>
-            <NavBar moduleName = {'Schedules'}/>
 
             <StyledCard>
                 <CardContent>
@@ -119,7 +118,10 @@ export default function Schedules(){
                         ),
                     }}>
                     </StyledTextField>
-                    <StyledButton sx = {{marginTop: "10px", marginLeft: "20px"}} variant = "contained">Search</StyledButton>
+                    <StyledButton sx = {{marginTop: "10px", marginLeft: "20px", '&:hover': {
+                    backgroundColor: '#FFFFFF',
+                    color: '#000000'
+                }}} variant = "contained">Search</StyledButton>
                 </CardContent>
             </StyledCard>
 

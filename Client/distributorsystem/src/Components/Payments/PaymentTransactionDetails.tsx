@@ -2,6 +2,7 @@ import NavBar from "../../Global Components/NavBar";
 import Typography  from '@mui/material/Typography';
 import styled from "@emotion/styled";
 import { Stack, Card, CardContent, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Button } from '@mui/material';
+import { Link } from "react-router-dom";
 
 const StyledHeaderTypography = styled(Typography)({
     position: "absolute",
@@ -102,7 +103,6 @@ const RedirectButton = styled(Button)({
 export default function PaymentTransactionDetails() {
     return(
         <div>
-            <NavBar moduleName = {'Collector Assignment'}/>
             <StyledHeaderTypography>Order Transaction Details</StyledHeaderTypography>
             <StyledDealerHeader>Dealer Contact Information</StyledDealerHeader>
             <Stack sx = {{position: 'absolute', top: '180px', left: '70px'}}>
@@ -164,7 +164,7 @@ export default function PaymentTransactionDetails() {
                     </TableContainer>
                 </CardContent>
             </StyledCard>
-            <RedirectButton>View/edit payment transactions in the Scheduling page</RedirectButton>
-        </div>  
+            <Link to="/schedules"><RedirectButton>View/edit payment transactions in the Scheduling page</RedirectButton></Link>
+        </div>      
     );
 }

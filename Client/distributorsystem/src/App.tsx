@@ -1,24 +1,16 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ScheduleOrderTransaction from './Components/Schedules/ScheduleOrderTransaction';
+import PaymentSummary from './Components/Payments/PaymentSummary';
+import PaymentTransactionDetails from './Components/Payments/PaymentTransactionDetails';
+import Content from './Contents';
+import MainRoutes from './Global Components/Routes';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MainRoutes/>
     </div>
   );
 }

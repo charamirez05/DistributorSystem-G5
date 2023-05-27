@@ -24,6 +24,16 @@ const rows = [
   createData(5, 'piece', 'Conditioner (20 mL)', 500, 9, 2750),
 ];
 
+ 
+export default function distributorOrderForm(){
+    return( 
+        <>
+        <div>
+        <NavBar moduleName=''/>
+         <div style={{marginLeft:"50px", marginTop:"20px",marginRight:"50px", marginBottom:"20px"}}>
+         <h1 style={{color:"White", fontFamily:"Verdana"}}>Product Distribution Form</h1>
+         <Grid container spacing = {4} sx={{display:"flex", justifyContent: "center"}}>
+=======
 
 
 
@@ -114,6 +124,7 @@ export default function DistributorOrderForm() {
               <Typography sx={{ color: "white" }}>Penalty Rate</Typography>
               <StyledTextField id="standard-basic" variant="standard" InputProps={{ disableUnderline: true }} inputRef={penaltyRateRef} />
             </Grid>
+
             <Grid item>
               <Typography sx={{ color: "white" }}>Payment Terms</Typography>
               <Select
