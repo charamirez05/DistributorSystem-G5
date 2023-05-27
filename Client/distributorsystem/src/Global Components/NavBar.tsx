@@ -79,6 +79,8 @@ export default function NavBar(props: navProps) {
                         <Link to="/orderTransactionDetails"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Order Transaction Details</Button></Link>
                         <Link to="/paymentList"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Payment List</Button></Link>
                         <Link to="/recordDirectPayment"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Record Direct Payment</Button></Link>
+                        <Link to="/distributorOrderForm"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Product Distribution Form - Distributor </Button></Link>
+                    
                     </Drawer>
 
                 </Toolbar>

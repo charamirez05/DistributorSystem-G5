@@ -18,13 +18,14 @@ import PaymentTransactionDetails from "../Components/Payments/PaymentTransaction
 import OrderConfirmation from "../Components/Product Distribution/OrderConfirmartion";
 import RecordDirectPayment from "../Components/Payments/RecordDirectPayment";
 import Content from "./Contents";
+import DataGridOrder from "../Components/Collector Assignment/DateGridOrder";
 export default function MainRoutes(){
     return(
         <Routes>
             <Route path="/" element={<Content/>}>
                 <Route path="/" element={<Navigate replace to="dashboard"/>}/>
                 <Route path="/dashboard" element={<Dashboard/>}/>
-                <Route path="/assignmentCollector" element={<AssignmentList/>}/>
+                <Route path="/assignmentCollector" element={<DataGridOrder/>}/>
                 <Route path="/paymentList" element={<PaymentList/>}/>
                 <Route path="/dealearOrderForm" element={<DealerOrderForm/>}/>
                 <Route path="/distributorOrderForm" element={<DistributorOrderForm/>}/>

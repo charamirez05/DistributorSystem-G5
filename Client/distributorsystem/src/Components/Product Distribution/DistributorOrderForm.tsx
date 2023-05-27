@@ -25,18 +25,6 @@ const rows = [
 ];
 
  
-export default function distributorOrderForm(){
-    return( 
-        <>
-        <div>
-        <NavBar moduleName=''/>
-         <div style={{marginLeft:"50px", marginTop:"20px",marginRight:"50px", marginBottom:"20px"}}>
-         <h1 style={{color:"White", fontFamily:"Verdana"}}>Product Distribution Form</h1>
-         <Grid container spacing = {4} sx={{display:"flex", justifyContent: "center"}}>
-=======
-
-
-
 const StyledProductTextField = styled(TextField)({
   backgroundColor: "#AFD3E2", borderRadius: "22px", input: {
     padding: "10px", color: "black"
@@ -62,7 +50,7 @@ const StyledTyporaphy = styled(Typography)({
   right: '10px',
   top: '6px',
   fontFamily: 'Inter, sans - serif',
-})
+});
 
 
 export default function DistributorOrderForm() {
@@ -241,6 +229,4 @@ export default function DistributorOrderForm() {
   );
 
 }
-
-
 

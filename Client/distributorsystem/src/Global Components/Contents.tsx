@@ -1,9 +1,3 @@
-]
-
-
-
-
-
 import React from 'react';
 import {Outlet, useLocation} from 'react-router-dom';
 import NavBar from './NavBar';
@@ -22,16 +16,9 @@ export default function Content() {
         '/paymentList': 'Payment Lists',
         '/recordDirectPayment': 'Record Direct Payment',
 
-        '/assignmentCollector':'Collector Assignment',
-        '/dealerRegistration':'Dealer Registration',
-
-
         '/distributorOrderForm':'Distribution Order Form',
         '/orderConfirmation': 'Order Confrimation',
-
-        '/paymentList':'Payment List',
         '/paymentSummary':'Payment Summary',
-        '/recordDirectPayment':'Record Direct Payment',
         
     };
     const navpage=navPageMapping[path] || 'Unknown';
