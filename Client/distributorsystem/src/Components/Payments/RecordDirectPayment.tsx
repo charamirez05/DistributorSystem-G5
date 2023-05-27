@@ -270,6 +270,7 @@ export default function RecordDirectPayment() {
             <StyledButton>Save Payment Record</StyledButton>
 
         </div>
+         
     )
 
 }

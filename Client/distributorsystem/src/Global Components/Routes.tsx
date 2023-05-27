@@ -15,6 +15,7 @@ import DealerOrderForm from "../Components/Product Distribution/DealerOrderForm"
 import DealaerProfile from "../Components/Profiles/DealerProfile";
 import SignIn from "../Components/Sign-in/SignInScreen";
 import PaymentTransactionDetails from "../Components/Payments/PaymentTransactionDetails";
+import OrderConfirmation from "../Components/Product Distribution/OrderConfirmartion";
 import RecordDirectPayment from "../Components/Payments/RecordDirectPayment";
 import Content from "./Contents";
 export default function MainRoutes(){
