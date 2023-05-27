@@ -279,6 +279,63 @@ export default function PaymentList() {
         },
     ];
 
+    return (
+      <div>
+        <Grid
+            container
+            alignItems="center"
+            justifyContent="center"
+            sx={{ marginTop: '20px', marginBottom: '20px' }}>
+
+            <Box sx={{ width: '1250px', bgcolor: '#ffffff', height: '100px', borderRadius: '22px' }}>
+                <Stack sx={{ position: "absolute", top: '100px', left: '120px', marginBottom: '10px' }} direction={'row'}>
+                    <StyledTyporaphy>
+                        Filter by Receipt ID
+                    </StyledTyporaphy>
+                    <Autocomplete
+                        disablePortal
+                        id="combo-box-demo"
+                        options={top100Films}
+                        size="small"
+                        sx={{ width: 200, maxHeight: '200px', fontSize: '15px', paddingInline: '73px' }}
+                        renderInput={(params) => <TextField {...params} InputProps={{
+                            ...params.InputProps, disableUnderline: true, style: {
+                                fontSize: "10px", 
+                                paddingLeft:'10px',
+                                backgroundColor: "#E9E9E9",
+                                borderRadius: '22px',
+                            }
+                        }}
+
+                            variant="standard"
+                        />}
+                    />
+                </Stack>
+
+                <Stack sx={{ position: "absolute", top: '140px', left: '120px', marginBottom: '10px' }} direction={'row'}>
+                    <StyledTyporaphy>
+                        Filter by Payment Transaction ID
+                    </StyledTyporaphy>
+                    <Autocomplete
+                        disablePortal
+                        id="combo-box-demo"
+                        options={top100Films}
+                        size="small"
+                        sx={{ width: 200, maxHeight: '200px', }}
+                        renderInput={(params) => <TextField {...params} InputProps={{
+                            ...params.InputProps, disableUnderline: true, style: {
+                                fontSize: "10px", 
+                                paddingLeft:'10px',
+                                backgroundColor: "#E9E9E9",
+                                borderRadius: '22px',
+                            }
+                        }}
+
+                            variant="standard"
+                        />}
+                    />
+                </Stack>
+
     const rowss = [
         { id: 12121, paymentTransactionID: 21212, dealerName: 'John Doe', paymentType: 'Installment(4 gives)', paymentStatus: 'pending', receiverName: 'Jane Doe' },
         { id: 23232, paymentTransactionID: 32323, dealerName: 'James Doe', paymentType: 'Installment(4 gives)', paymentStatus: 'ongoing', receiverName: 'Janet Doe' },

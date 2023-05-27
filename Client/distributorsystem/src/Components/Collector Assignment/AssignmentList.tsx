@@ -14,18 +14,14 @@ import { useEffect } from 'react';
 
 //     moduleName: string;
 // }
-interface AutocompleteOption {
-    label: string;
-  }
- 
-  
-  const ComboContainer = styled('div')({
-    '& .MuiOutlinedInput-root': {
-      height: '20px',
-      
-    },
-    '& .MuiAutocomplete-inputRoot': {
-      height: '40%',
+    interface AutocompleteOption {
+      label: string;
+    } 
+    // For Combo box or Autocompletion Styling
+      const ComboContainer = styled('div')({
+          '& .MuiOutlinedInput-root': {
+            height: '20px',
+          },
 
     },
     '& .MuiAutocomplete-popup': {
@@ -147,22 +143,29 @@ export default function AssignmentList(){
               </div>
           </Card>
 
-  {/* Card for Data Grid Order Transaction Records  */}   
-          <Card sx={{height:550, margin:"10px 0px 20px 0px", borderRadius:"15px"}}>
-                <div style={{display: "flex", flexDirection: "row"}}>
-                  <div style={{ display: 'flex', alignItems: 'center', marginTop:'10px'}}> 
+          '& .MuiAutocomplete-inputRoot': {
+            height: '40%',
 
-  {/* Typography-Group Transactions */}
-                    <Typography gutterBottom variant="h6" style={{ textAlign: 'left', fontWeight: 'bold', margin: '0px 0px 0px 30px', color:'#146C94',display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                        <span style={{ textAlign: 'left', fontSize: '18px'}}>Group Transactions by</span>
-                        <TextField id="standard-basic" variant="standard" InputProps={{ disableUnderline: true }} sx={{margin: '0px 0px 0px 20px',width:'100px',background:"#E9E9E9", borderRadius: '5px', input:{ padding: "10px", color:'#146C94'}}} />
-                    </Typography>
+          },
 
-  {/* Button- Group Transcations */}
-                    <CardActions sx={{  alignItems: 'center', marginLeft: '10px' }}>
-                        <Button variant="contained" sx={{ height:'50px',borderRadius:'15px', color: '#146C94',fontWeight:'bold', backgroundColor: '#AFD3E2', '&:hover': { backgroundColor: '#AFD3E2FF' } }}>Group Transaction</Button>
-                    </CardActions>
-                    </div> 
+          '& .MuiAutocomplete-popup': {
+            maxHeight: '40px',
+          },
+      });
+
+
+      const theme = createTheme();
+
+          //** Function Here*/  
+          export default function AssignmentList(){
+
+            //Temporary list of dealer name for Autocompletion of Dealer Name
+                const dealerName = [
+                    { label: 'Ariel Rivera', id: 1 },
+                    { label: 'Kim Possible', id: 2 },
+                    { label: 'Charmaine Ramirez', id: 3 },
+                    { label: 'Ephraim Perez', id: 4 }
+                ];
 
                     <div style={{ display: "flex", alignItems: "center",marginTop:'20px' }}> 
 
@@ -199,15 +202,44 @@ export default function AssignmentList(){
   {/* Button- Data Grid Order */}
                     <div style={{marginTop:'15px', }}>
                           <DataGridOrder/>
-                    </div>
-                    
-          
-                   </Card>
-          
-              </ThemeProvider>
-           </div>
-        </div>
-  </div>
 
-)
-}
+            //Temporary list of collector name for Autocompletion of Dealer Name
+                const collectorName=[
+                  { label: 'Cherry Gil', id: 1 },
+                  { label: 'Gardo Versoza', id: 2 },
+                  { label: 'Jose Legazpi', id: 3 },
+                  { label: 'Maria Gomez', id: 4 }
+                ];
+                  //** Return Statement*/  
+                  return( 
+                  <div>        
+                      {/* <NavBar moduleName={'Assignment Collector'}/> */}
+                      <div className='container' style={{display: 'flex', justifyContent: 'center' }}>
+                          <div className='cardContainer' style={{ width: '95%' }}>
+
+                          {/* Card For Number of Transaction Records */}
+                                  <Card sx={{ margin:"40px 0px 0px 0px", borderRadius:"15px",  display:"flex"}}>
+                                      <div className='numDiv'>
+                                              <Typography gutterBottom variant="h6" style={{ textAlign: 'left', fontWeight: 'bold', margin: '10px 0px 0px 20px', color:'#146C94',display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
+                                                <span style={{ textAlign: 'left', fontSize: '18px'}}>Number of Order Transaction Records</span>
+                                                <span style={{ textAlign: 'right', fontSize:'15px', color: '#2A9221'}}>Assigned: </span>
+                                                <span style={{ textAlign: 'right', fontSize:'15px', color: '#E77D7D'}}>Not Assigned: </span>
+                                                <span style={{ textAlign: 'right', fontSize:'15px'}}>Total:  </span>
+                                              </Typography>
+                                      </div>  
+                                  </Card>
+
+                          {/* Card For Filters */}
+                          <ThemeProvider theme={theme}>
+                                  <Card sx={{borderRadius:'22px', height:'550px', marginTop:'10px'}}>
+                                     <div style={{marginTop:'15px', }}>
+                                         <DataGridOrder/>
+                                    </div>   
+                                  </Card>          
+                          </ThemeProvider>
+                            </div>
+                        </div>
+                    </div>
+
+                  )
+          }

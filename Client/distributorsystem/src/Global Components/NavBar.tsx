@@ -1,20 +1,18 @@
 import * as React from 'react';
 import { AppBar, Typography, Box, Toolbar, Button, IconButton, Drawer, List, ListItemButton, ListItemText } from "@mui/material";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import Dashboard from '../Components/Dashboard/Dashboard';
 import PaymentList from '../Components/Payments/PaymentList';
 import DealerRegistration from '../Components/Registration/DealerRegistration';
 import ScheduleOrderTransaction from '../Components/Schedules/ScheduleOrderTransaction';
 import AssignmentList from '../Components/Collector Assignment/AssignmentList';
 
-
-
-type navProps = {
-    moduleName: string;
+type navProps = { moduleName: string;
 }
+//** Function here*/
 export default function NavBar(props: navProps) {
     const[isOpen, setOpen]=useState(false)
     const location=useLocation()
@@ -86,6 +84,8 @@ export default function NavBar(props: navProps) {
 
                 </Toolbar>
             </AppBar>
+
         </Box>
-    )
+
+                )
 }
