@@ -11,7 +11,7 @@ export default function Content() {
         '/dashboard':'Dashboard',
 
         '/assignmentCollector':'Collector Assignment',
-        '/dealerRegistration':'Dealer Registration'
+        '/dealerRegistration':'Dealer Registration',
 
 
         '/distributorOrderForm':'Distribution Order Form',
