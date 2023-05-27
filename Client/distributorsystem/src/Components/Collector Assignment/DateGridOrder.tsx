@@ -3,7 +3,10 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridRowId, GridValueGetterParams } from '@mui/x-data-grid';
 import CardActions from '@mui/material/CardActions';
 import { Autocomplete, Button, Card, TextField, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { IEmployee, useRest } from '../../restCalls/employeeUseRest';
+import { IOrder } from '../../restCalls/orderUseRest';
+import axios from 'axios';
 
 // --Column / data headers for Collector Assignment
 const columns: GridColDef[] = [
@@ -46,43 +49,7 @@ const columns: GridColDef[] = [
 ];
 
 // --Temporary Records for Collector Assignment
-const initialRows = [
-  {
-    id: 1,
-    dealerName: 'John Doe',
-    dateDue: '18/03/2023',
-    amountDue: "Php 55,000.00",
-    collectorStatus: 'Assigned',
-    collectorName: 'Jose Reyes'
-  },
 
-  {
-    id: 2,
-    dealerName: 'Jane Doe',
-    dateDue: '18/03/2023',
-    amountDue: "Php 65,000.00",
-    collectorStatus: 'Assigned',
-    collectorName: 'Jose Reyes'
-  },
-
-  {
-    id: 3,
-    dealerName: 'Jane Doe',
-    dateDue: '18/03/2023',
-    amountDue: "Php 65,000.00",
-    collectorStatus: 'Assigned',
-    collectorName: 'Jose Reyes'
-  },
-
-  {
-    id: 4,
-    dealerName: 'Jane Doe',
-    dateDue: '18/03/2023',
-    amountDue: "Php 65,000.00",
-    collectorStatus: 'Assigned',
-    collectorName: 'Jose Reyes'
-  },
-];
 
 
 //Auto Completion or combo box for Assigning a collector    
@@ -96,19 +63,79 @@ const collectorName = [
 
 //DataGrid Function 
 export default function DataGridOrder() {
+
+  const [collectors, setCollectors] = useState<IEmployee[]>([]);
+  const [orders, setOrders] = useState<IOrder[]>([]);
+
+
+
+  const [getCollectorByID, collector] = useRest();
+
+  useEffect(() => {
+    getAllCollectors();
+    getAllOrders();
+
+  }, []);
+
+  function getAllCollectors() {
+    axios.get<IEmployee[]>('http://localhost:3000/employee/getAllCollectors')
+      .then((response) => {
+        setCollectors(response.data);
+        //console.log(response.data);
+      })
+      .catch((error) => {
+        console.error('Error retrieving collectors:', error);
+        alert("Error retrieving collectors. Please try again.");
+      });
+  }
+
+  function getAllOrders() {
+    axios.get<IOrder[]>('http://localhost:3000/orders/getAllOrders')
+      .then((response) => {
+        setOrders(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error('Error retrieving collectors:', error);
+        alert("Error retrieving collectors. Please try again.");
+      });
+  }
+
+  const columns = [
+    { field: 'dealerName', headerName: 'Dealer Name', width: 300 },
+    { field: 'orderAmount', headerName: 'Order Amount', width: 300 },
+    { field: 'collectorStatus', headerName: 'Collector Status', width: 300 },
+    { field: 'collectorName', headerName: 'Collector Name', width: 400 },
+  ];
+
+  const rows = orders.map((order, index) => {
+    const foundCollector = collectors.find(employee => employee.employeeID === order.collectorID);
+  
+    return {
+      id: index + 1,
+      dealerName: 'John Jacob Jingleheimer Schimdt',
+      orderAmount: order.orderAmount,
+      collectorStatus: order.collectorID !== null
+        ? 'Assigned'
+        : 'Not Assigned',
+      collectorName: foundCollector ? `${foundCollector.employeeFName} ${foundCollector.employeeLName}` : '',
+    };
+  });
+
+
   const [selectedCollector, setSelectedCollector] = useState<any>(null); // State for the selected collector
   const [selectedCollectorId, setSelectedCollectorId] = useState<number | null>(null); // State for the selected collector ID
   const [selectedRows, setSelectedRows] = useState<number[]>([]); // State for selection of rows 
-  const [rows, setRows] = React.useState(initialRows); // State for grouping order transaction
+  //const [rows, setRows] = React.useState(initialRows); // State for grouping order transaction
   const [groupByValue, setGroupByValue] = useState(''); // // State for the groupBy input value
 
   const headerClassName = "custom-header"; // For Header Columns and styling
 
   // Handler for data grid in row selection
-  const handleRowSelection = (selectionModel: GridRowId[]) => {
+  /* const handleRowSelection = (selectionModel: GridRowId[]) => {
     const selectedRowIds = selectionModel.map((id) => Number(id));
     setSelectedRows(selectedRowIds);
-  };
+  }; */
 
   // Handler for removing collector Button 
   const handleRemoveCollector = () => {
@@ -122,7 +149,7 @@ export default function DataGridOrder() {
       }
       return row;
     });
-    setRows(updatedRows);
+    //setRows(updatedRows);
     setSelectedRows([]);
   };
 
@@ -139,7 +166,7 @@ export default function DataGridOrder() {
         }
         return row;
       });
-      setRows(updatedRows);
+      //setRows(updatedRows);
       setSelectedRows([]);
     }
   };
@@ -202,7 +229,8 @@ export default function DataGridOrder() {
               <Autocomplete
                 disablePortal
                 id="combo-box-demo"
-                options={collectorName}
+                options={collectors}
+                getOptionLabel={(option) => option.employeeFName + " " + option.employeeLName}
                 size="small"
                 value={selectedCollector}
                 onChange={(event, newValue) => {
@@ -217,7 +245,7 @@ export default function DataGridOrder() {
                       InputProps={{
                         ...params.InputProps, disableUnderline: true,
                         style: {
-                          fontSize: "15px", backgroundColor: "#E9E9E9",
+                          fontSize: "15px", backgroundColor: "#E9E9E9", color: 'black',
                           borderRadius: '5px', height: '50px', paddingLeft: '5px', margin: '0px 0px 10px 0px'
                         }
                       }}
@@ -255,6 +283,11 @@ export default function DataGridOrder() {
             </Button>
           </CardActions>
         </div>
+
+
+
+
+
         {/* Box for DataGrid Table */}
         <Box sx={{ height: '100%', marginTop: '20px' }}>
           <DataGrid
@@ -274,11 +307,14 @@ export default function DataGridOrder() {
             }}
             pageSizeOptions={[5]}
             checkboxSelection
-            onRowSelectionModelChange={(handleRowSelection)}
+            //onRowSelectionModelChange={(handleRowSelection)}
             rowSelectionModel={selectedRows}
           //disableRowSelectionOnClick
           />
         </Box>
+
+
+
         <style>{`
                               .${headerClassName} {
                                 background-color: #AFD3E2;

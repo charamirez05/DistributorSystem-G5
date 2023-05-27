@@ -10,7 +10,11 @@ import DealerRegistration from '../Components/Registration/DealerRegistration';
 import ScheduleOrderTransaction from '../Components/Schedules/ScheduleOrderTransaction';
 import AssignmentList from '../Components/Collector Assignment/AssignmentList';
 
-type navProps = { moduleName: string;
+
+
+type navProps = {
+  moduleName: string;
+
 }
 export default function NavBar(props: navProps) {
     const[isOpen, setOpen]=useState(false)

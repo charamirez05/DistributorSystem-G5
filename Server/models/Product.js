@@ -25,7 +25,7 @@ Product.init(
       allowNull: false,
     },
     productUnit: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     productPrice: {
@@ -34,10 +34,6 @@ Product.init(
     },
     commissionRate: {
       type: DataTypes.FLOAT,
-      allowNull: false,
-    },
-    productPrice: {
-      type: DataTypes.STRING,
       allowNull: false,
     },
     commissionRate: {

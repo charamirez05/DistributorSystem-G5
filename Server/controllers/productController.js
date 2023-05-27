@@ -20,16 +20,8 @@ const createProduct = async (req, res) => {
 const getAllProducts = async (req, res) => {
   try {
     const products = await Product.findAll();
-
-    const modifiedProducts = products.map(product => ({
-      productID: product.productID,
-      productName: product.productName,
-      productUnit: product.productUnit,
-      productPrice: product.productPrice,
-      commissionRate: product.commissionRate
-    }));
-
-    res.json(modifiedProducts);
+    
+    res.json(products);
   } catch (error) {
     console.error('Error retrieving products:', error);
     res.status(500).json({ error: 'Internal server error' });

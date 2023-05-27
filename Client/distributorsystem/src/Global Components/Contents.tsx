@@ -11,6 +11,7 @@ export default function Content() {
         '/dashboard':'Dashboard',
         '/assignmentCollector':'Assignment Collector',
         '/dealerRegistration':'Dealer Registration',
+
         '/schedules':'Payment Transaction Schedule',
         '/orderTransactionDetails': 'Order Transaction Details',
         '/paymentList': 'Payment Lists',
