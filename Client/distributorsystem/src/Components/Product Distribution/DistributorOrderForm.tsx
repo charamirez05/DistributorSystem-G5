@@ -24,9 +24,7 @@ const rows = [
   createData(5, 'piece', 'Conditioner (20 mL)', 500, 9, 2750),
 ];
 
-
-
-
+ 
 const StyledProductTextField = styled(TextField)({
   backgroundColor: "#AFD3E2", borderRadius: "22px", input: {
     padding: "10px", color: "black"
@@ -102,6 +100,7 @@ export default function DistributorOrderForm() {
               <Typography sx={{ color: "white" }}>Penalty Rate</Typography>
               <StyledTextField id="standard-basic" variant="standard" InputProps={{ disableUnderline: true }} inputRef={penaltyRateRef} />
             </Grid>
+
             <Grid item>
               <Typography sx={{ color: "white" }}>Payment Terms</Typography>
               <Select
@@ -223,6 +222,4 @@ export default function DistributorOrderForm() {
   );
 
 }
-
-
 

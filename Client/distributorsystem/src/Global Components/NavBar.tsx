@@ -11,8 +11,10 @@ import ScheduleOrderTransaction from '../Components/Schedules/ScheduleOrderTrans
 import AssignmentList from '../Components/Collector Assignment/AssignmentList';
 
 
+
 type navProps = {
   moduleName: string;
+
 }
 export default function NavBar(props: navProps) {
     const[isOpen, setOpen]=useState(false)
@@ -77,16 +79,18 @@ export default function NavBar(props: navProps) {
                         <Link to="/dashboard"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Dashboard</Button></Link>
                         <Link to="/dealerRegistration"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Dealer Registration</Button></Link>
                         <Link to="/assignmentCollector"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Assignment Collector</Button></Link>
-
-                        <Link to="/distributorOrderForm"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Distributor Order Form</Button></Link>
-                        <Link to="/paymentSummary"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Payment Summary</Button></Link>
+                        <Link to="/schedules"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Payment Transaction Schedules</Button></Link>
+                        <Link to="/orderTransactionDetails"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Order Transaction Details</Button></Link>
                         <Link to="/paymentList"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Payment List</Button></Link>
                         <Link to="/recordDirectPayment"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Record Direct Payment</Button></Link>
-                        
+                        <Link to="/distributorOrderForm"><Button sx={{fontWeight:'bold',color:'#146C94', height:'80px',width:'100%','&:hover': { backgroundColor: '#EEEEEE' }}}>Product Distribution Form - Distributor </Button></Link>
+                    
                     </Drawer>
 
                 </Toolbar>
             </AppBar>
+
         </Box>
-    )
+
+                )
 }

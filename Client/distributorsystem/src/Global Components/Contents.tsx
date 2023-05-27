@@ -12,14 +12,15 @@ export default function Content() {
         '/assignmentCollector':'Assignment Collector',
         '/dealerRegistration':'Dealer Registration',
 
+        '/schedules':'Payment Transaction Schedule',
+        '/orderTransactionDetails': 'Order Transaction Details',
+        '/paymentList': 'Payment Lists',
+        '/recordDirectPayment': 'Record Direct Payment',
+
         '/distributorOrderForm':'Distribution Order Form',
         '/orderConfirmation': 'Order Confrimation',
-
-        '/paymentList':'Payment List',
         '/paymentSummary':'Payment Summary',
-        '/recordDirectPayment':'Record Direct Payment',
         
-
     };
     const navpage=navPageMapping[path] || 'Unknown';
     return navpage;

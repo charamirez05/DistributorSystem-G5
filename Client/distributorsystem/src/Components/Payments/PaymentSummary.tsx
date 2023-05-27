@@ -22,7 +22,7 @@ export default function PaymentSummary() {
         left: '80px',
         color: '#ffffff',
         fontSize: '15px',
-        width:'max-content',
+        width: 'max-content',
         fontFamily: 'Inter, sans - serif',
     });
 
@@ -30,7 +30,7 @@ export default function PaymentSummary() {
         position: 'absolute',
         textAlign: 'left',
         left: '100px',
-        top:'10px',
+        top: '10px',
         color: '#ffffff',
         fontSize: '25px',
         fontWeight: 'bold',
@@ -48,21 +48,21 @@ export default function PaymentSummary() {
         fontFamily: 'Inter, sans - serif',
     });
 
-    var paymentType = "Collection";
+    var paymentType = "Direct";
 
     if (paymentType.match("Direct"))
         return <div>
-        
+
             <ScreenLabel>
                 Payment Summary
             </ScreenLabel>
-            <Grid item xs={8} sx={{position:'absolute', right:'70px', top: '95px',}}>
-                <PrintIcon sx={{ fontSize: 55, color: 'white'}} />
+            <Grid item xs={8} sx={{ position: 'absolute', right: '70px', top: '95px', }}>
+                <PrintIcon sx={{ fontSize: 55, color: 'white' }} />
 
             </Grid>
 
             <div>
-                <Stack sx={{position: 'absolute', left: '10px', top: '180px' }}>
+                <Stack sx={{ position: 'absolute', left: '10px', top: '180px' }}>
                     <FieldLabel>
                         Receipt ID
                     </FieldLabel>
@@ -71,7 +71,7 @@ export default function PaymentSummary() {
                     </FieldData>
                 </Stack>
 
-                <Stack sx={{position: 'absolute', left: '210px', top: '180px' }}>
+                <Stack sx={{ position: 'absolute', left: '210px', top: '180px' }}>
                     <FieldLabel>
                         Payment Transaction ID
                     </FieldLabel>
@@ -174,10 +174,10 @@ export default function PaymentSummary() {
         <ScreenLabel>
             Payment Summary
         </ScreenLabel>
-        <Grid item xs={8} sx={{position:'absolute', right:'70px', top: '95px',}}>
-                <PrintIcon sx={{ fontSize: 55, color: 'white'}} />
+        <Grid item xs={8} sx={{ position: 'absolute', right: '70px', top: '95px', }}>
+            <PrintIcon sx={{ fontSize: 55, color: 'white' }} />
 
-            </Grid>
+        </Grid>
 
         <div>
             <Stack sx={{ position: 'absolute', left: '10px', top: '180px' }}>
