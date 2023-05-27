@@ -33,7 +33,7 @@ export default function orderConfirmation(){
     return(
         <>
         <div>
-        <NavBar moduleName=''/>
+        
          <div style={{marginLeft:"50px", marginTop:"20px",marginRight:"50px", marginBottom:"20px"}}>
          <h1 style={{color:"White", fontFamily:"Verdana"}}>Product Distribution Form</h1>
          <Grid container spacing = {10} sx={{display:"flex", justifyContent: "center"}}>

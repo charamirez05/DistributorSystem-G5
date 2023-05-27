@@ -74,7 +74,7 @@ export default function RecordDirectPayment() {
 
     return (
         <div>
-            <NavBar moduleName="Payments" />
+        
             <h1 className="MainLabels"> Record Direct Payment </h1>
 
                 <div style={{ position: "relative", top: "70px" }}>
