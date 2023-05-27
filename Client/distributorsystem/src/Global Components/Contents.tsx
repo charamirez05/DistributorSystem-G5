@@ -1,6 +1,6 @@
 import React from 'react';
 import {Outlet, useLocation} from 'react-router-dom';
-import NavBar from './Global Components/NavBar';
+import NavBar from './NavBar';
 
 
 export default function Content() {
@@ -9,20 +9,13 @@ export default function Content() {
     const path=location.pathname;
     const navPageMapping: Record<string,string>={
         '/dashboard':'Dashboard',
-
-        '/assignmentCollector':'Collector Assignment',
+        '/assignmentCollector':'Assignment Collector',
         '/dealerRegistration':'Dealer Registration',
-
-
-        '/distributorOrderForm':'Distribution Order Form',
-        '/orderConfirmation': 'Order Confrimation',
-
-        '/paymentList':'Payment List',
-        '/paymentSummary':'Payment Summary',
-        '/recordDirectPayment':'Record Direct Payment',
-        
-
-
+        '/schedules':'Payment Transaction Schedule',
+        '/distributorOrderForm': 'Product Distribution Form',
+        '/orderTransactionDetails': 'Order Transaction Details',
+        '/paymentList': 'Payment List',
+        '/recordDirectPayment': 'Record Direct Payment'
     };
     const navpage=navPageMapping[path] || 'Unknown';
     return navpage;

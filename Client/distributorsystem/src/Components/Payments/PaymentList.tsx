@@ -1,8 +1,10 @@
-import { Autocomplete, Box, Container, FormLabel, Stack, TextField, Table, TableRow, TableBody, TableCell, TableContainer, styled, TableHead, Typography, Paper, Grid, Button } from "@mui/material";
+import { Autocomplete, Box, Container, FormLabel, Stack, TextField, Table, TableRow, TableBody, TableCell, TableContainer, styled, TableHead, Typography, Paper, Grid, Button, Card, makeStyles, createStyles } from "@mui/material";
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import NavBar from "../../Global Components/NavBar";
 
 
 export default function PaymentList() {
+    const headerClassName = "custom-header"
 
     const top100Films = [
         { label: 'The Shawshank Redemption', year: 1994 },
@@ -191,7 +193,8 @@ export default function PaymentList() {
 
 
     const StyledTableCell = styled(TableCell)({
-        fontSize: '12px',
+        backgroundColor: "#AFD3E2",
+        fontSize: '12px'
     });
 
     const StyledButton = styled(Button)({
@@ -213,212 +216,122 @@ export default function PaymentList() {
         },
     });
 
-    return (<div>
-    
+    const columns: GridColDef[] = [
+        { field: 'id', headerName: 'Receipt ID', width: 160, headerAlign: 'center', align: 'center' },
+        { field: 'paymentTransactionID', headerName: 'Payment Transaction ID', width: 240, headerAlign: 'center', align: 'center' },
+        {
+          field: 'dealerName',
+          headerName: 'Dealer Name',
+          width: 160,
+          editable: false,
+          headerAlign: 'center', 
+          align: 'center',
+        },
+        {
+          field: 'paymentType',
+          headerName: 'Payment Type',
+          width: 170,
+          editable: false,
+          headerAlign: 'center', 
+          align: 'center',
+        },
+        {
+          field: 'paymentStatus',
+          headerName: 'PaymentStatus',
+          width: 160,
+          editable: false,
+          headerAlign: 'center', 
+          align: 'center',
+        },
+        {
+            field: 'receiverName',
+            headerName: 'Receiver Name',
+            width: 160,
+            editable: false,
+            headerAlign: 'center', 
+            align: 'center',
+        },
+        {
+            field: " ",
+            renderCell: () => {
+                return (
+                    <Button
+                        variant = "contained"
+                        sx = {{ color: "#AFD3E2"}}
+                    >View</Button>
+                )
+            },
+            sortable: false,
+            disableColumnMenu: true,
+        },
+        {
+            field: "  ",
+            renderCell: () => {
+                return (
+                    <Button
+                        variant = "contained"
+                        sx = {{ color: "#AFD3E2"}}
+                    >Confirm</Button>
+                )
+            },
+            sortable: false,
+            disableColumnMenu: true,
+        },
+    ];
 
+    const rowss = [
+        { id: 12121, paymentTransactionID: 21212, dealerName: 'John Doe', paymentType: 'Installment(4 gives)', paymentStatus: 'pending', receiverName: 'Jane Doe' },
+        { id: 23232, paymentTransactionID: 32323, dealerName: 'James Doe', paymentType: 'Installment(4 gives)', paymentStatus: 'ongoing', receiverName: 'Janet Doe' },
+    ];
 
-        <Grid
-            container
-            alignItems="center"
-            justifyContent="center"
-            sx={{ marginTop: '20px', marginBottom: '20px' }}
-        >
+    const StyledPaymentListCard = styled(Card)({
+        borderRadius: "20px",
+        padding: 1,
+        width: 1255,
+        height: 540,
+        position: "absolute",
+        marginLeft: "22px",
+        marginTop: "30px"
+    });
 
-            <Box sx={{ width: '1250px', bgcolor: '#ffffff', height: '100px', borderRadius: '22px' }}>
-                <Stack sx={{ position: "absolute", top: '100px', left: '120px', marginBottom: '10px' }} direction={'row'}>
-                    <StyledTyporaphy>
-                        Filter by Receipt ID
-                    </StyledTyporaphy>
-                    <Autocomplete
-                        disablePortal
-                        id="combo-box-demo"
-                        options={top100Films}
-                        size="small"
-                        sx={{ width: 200, maxHeight: '200px', fontSize: '15px', paddingInline: '73px' }}
-                        renderInput={(params) => <TextField {...params} InputProps={{
-                            ...params.InputProps, disableUnderline: true, style: {
-                                fontSize: "10px", 
-                                paddingLeft:'10px',
-                                backgroundColor: "#E9E9E9",
-                                borderRadius: '22px',
-                            }
+    const StyledOverallCard = styled(Card)({
+        borderRadius: "20px",
+        width: 1300,
+        height: 600,
+        position: "absolute",
+        marginLeft: "130px",
+        marginTop: "20px"
+    });
+
+    return (
+        <div>
+
+            <StyledOverallCard>
+                <StyledPaymentListCard>
+                    <DataGrid
+                        rows={rowss}
+                        columns={columns.map((column) => ({
+                            ...column,
+                            headerClassName,
+                          }))}
+                        sx={{align: "center", color: "#146C94"}}
+                        initialState={{
+                            pagination: {
+                                paginationModel: {
+                                    pageSize: 5,
+                                },
+                            },
                         }}
-
-                            variant="standard"
-                        />}
+                        pageSizeOptions={[5]}
                     />
-                </Stack>
-
-                <Stack sx={{ position: "absolute", top: '140px', left: '120px', marginBottom: '10px' }} direction={'row'}>
-                    <StyledTyporaphy>
-                        Filter by Payment Transaction ID
-                    </StyledTyporaphy>
-                    <Autocomplete
-                        disablePortal
-                        id="combo-box-demo"
-                        options={top100Films}
-                        size="small"
-                        sx={{ width: 200, maxHeight: '200px', }}
-                        renderInput={(params) => <TextField {...params} InputProps={{
-                            ...params.InputProps, disableUnderline: true, style: {
-                                fontSize: "10px", 
-                                paddingLeft:'10px',
-                                backgroundColor: "#E9E9E9",
-                                borderRadius: '22px',
-                            }
-                        }}
-
-                            variant="standard"
-                        />}
-                    />
-                </Stack>
-
-                <Stack sx={{ position: "absolute", top: '100px', left: '540px', marginBottom: '10px' }} direction={'row'}>
-                    <StyledTyporaphy >
-                        Filter by Dealer Name
-                    </StyledTyporaphy>
-                    <Autocomplete
-                        disablePortal
-                        id="combo-box-demo"
-                        options={top100Films}
-                        size="small"
-                        sx={{ width: 200, maxHeight: '200px', fontSize: '15px', paddingInline: '23px' }}
-                        renderInput={(params) => <TextField {...params} InputProps={{
-                            ...params.InputProps, disableUnderline: true, style: {
-                                fontSize: "10px", 
-                                paddingLeft:'10px',
-                                backgroundColor: "#E9E9E9",
-                                borderRadius: '22px',
-                            }
-                        }}
-
-                            variant="standard"
-                        />}
-                    />
-                </Stack>
-                <Stack sx={{ position: "absolute", top: '140px', left: '540px', marginBottom: '10px' }} direction={'row'}>
-                    <StyledTyporaphy >
-                        Filter by Receiver Name
-                    </StyledTyporaphy>
-                    <Autocomplete
-                        disablePortal
-                        id="combo-box-demo"
-                        options={top100Films}
-                        size="small"
-                        sx={{ width: 200, maxHeight: '200px', fontSize: '15px', paddingInline: '10px' }}
-                        renderInput={(params) => <TextField {...params} InputProps={{
-                            ...params.InputProps, disableUnderline: true, style: {
-                                fontSize: "10px", 
-                                paddingLeft:'10px',
-                                backgroundColor: "#E9E9E9",
-                                borderRadius: '22px',
-                            }
-                        }}
-
-                            variant="standard"
-                        />}
-                    />
-                </Stack>
-
-                <Stack sx={{ position: "absolute", top: '100px', left: '940px', marginBottom: '10px' }} direction={'row'}>
-                    <StyledTyporaphy >
-                        Filter by Payment Type
-                    </StyledTyporaphy>
-                    <Autocomplete
-                        disablePortal
-                        id="combo-box-demo"
-                        options={top100Films}
-                        size="small"
-                        sx={{ width: 200, maxHeight: '200px', fontSize: '15px', paddingInline: '18px' }}
-                        renderInput={(params) => <TextField {...params} InputProps={{
-                            ...params.InputProps, disableUnderline: true, style: {
-                                fontSize: "10px", 
-                                paddingLeft:'10px',
-                                backgroundColor: "#E9E9E9",
-                                borderRadius: '22px',
-                            }
-                        }}
-
-                            variant="standard"
-                        />}
-                    />
-                </Stack>
-                <Stack sx={{ position: "absolute", top: '140px', left: '940px', marginBottom: '10px' }} direction={'row'}>
-                    <StyledTyporaphy >
-                        Filter by Payment Status
-                    </StyledTyporaphy>
-                    <Autocomplete
-                        disablePortal
-                        id="combo-box-demo"
-                        options={top100Films}
-                        size="small"
-                        sx={{ width: 200, maxHeight: '200px', fontSize: '15px', paddingInline: '10px' }}
-                        renderInput={(params) => <TextField {...params} InputProps={{
-                            ...params.InputProps, disableUnderline: true, style: {
-                                fontSize: "10px", 
-                                paddingLeft:'10px',
-                                backgroundColor: "#E9E9E9",
-                                borderRadius: '22px',
-                            }
-                        }}
-
-                            variant="standard"
-                        />}
-                    />
-                </Stack>
-            </Box>
-        </Grid>
-
-
-        <Grid
-            container
-            alignItems="center"
-            justifyContent="center"
-            sx={{ marginTop: '20px', marginBottom: '20px' }}
-        >
-            <TableContainer component={Paper} sx={{ borderRadius: '22px', maxHeight: "400px", width: '1300px' }}>
-                <Table size="small">
-                    <TableHead >
-                        <StyledTableRowTitle>
-                            <StyledTableCell align="center" >Receipt ID</StyledTableCell>
-                            <StyledTableCell align="center" >Payment Transaction ID</StyledTableCell>
-                            <StyledTableCell align="center" >Dealer Name</StyledTableCell>
-                            <StyledTableCell align="center" padding="none">Payment Type</StyledTableCell>
-                            <StyledTableCell align="center">Payment Status</StyledTableCell>
-                            <StyledTableCell align="center" >Receiver Name</StyledTableCell>
-                        </StyledTableRowTitle>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map((row) => (
-                            <StyledTableRow
-                                key={row.name}
-
-                            >
-                                <StyledTableCell component="th" scope="row" align="center">
-                                    {row.name}
-                                </StyledTableCell>
-                                <StyledTableCell align="center">{row.calories}</StyledTableCell>
-                                <StyledTableCell align="center">{row.fat}</StyledTableCell>
-                                <StyledTableCell align="center">{row.carbs}</StyledTableCell>
-                                <StyledTableCell align="center">{row.carbs}</StyledTableCell>
-                                <TableCell align="center">{row.carbs}</TableCell>
-                                <TableCell align="center">
-                                    <StyledButton variant="contained">
-                                        View
-                                    </StyledButton>
-                                </TableCell>
-                                <TableCell align="center">
-                                    <StyledButton variant="contained">
-                                        Confirm
-                                    </StyledButton>
-                                </TableCell>
-                            </StyledTableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </Grid>
-
+                    <style>{`
+                        .${headerClassName} {
+                            background-color: #AFD3E2;
+                            fontWeight: bold;
+                        }
+                    `}</style>
+                </StyledPaymentListCard>
+            </StyledOverallCard>
     </div>
     )
 }
