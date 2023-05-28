@@ -212,7 +212,8 @@ export default function DistributorOrderForm() {
                   paymentTerms: paymentTerm+"", 
                   orderAmount:0,
                   collectorID:-1, 
-                  orderedProducts: orderedProducts
+                  orderedProducts: orderedProducts,
+                  dealerID:1,
                 }
               )}}>Save</Button>
         </Box>

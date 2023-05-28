@@ -2,6 +2,7 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config.js');
 const OrderedProduct = require('./orderedProduct.js');
 const Employee = require('./Employee.js');
+const Dealer= require('./Dealer.js')
 
 class Order extends Model {
   static associate(models) {
@@ -11,6 +12,10 @@ class Order extends Model {
     });
     Order.belongsTo(Employee, {foreignKey: 'employeeID',
         as: 'employee'}); 
+
+    Order.belongsTo(Dealer,{foreignKey:'dealerID', 
+    as:'dealer'
+  });
   }
 }
 
@@ -47,6 +52,14 @@ Order.init(
       references: {
         model: 'Employees',
         key: 'employeeID',
+      },
+      allowNull: true,
+    },
+    dealerID:{
+      type:DataTypes.INTEGER,
+      references:{
+        model:'Dealers',
+        key:'dealerID',
       },
       allowNull: true,
     },

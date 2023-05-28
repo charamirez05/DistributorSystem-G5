@@ -16,7 +16,8 @@ export interface IOrder {
     paymentTerms: string,
     orderAmount:number,
     orderedProducts: IOrderedProducts[],
-    collectorID: number
+    collectorID: number,
+    dealerID: number
 }
 
 
@@ -41,6 +42,7 @@ export const useRest = (): [(order: IOrder) => void, IOrder | undefined] => {
             paymentTerms: order.paymentTerms,
             orderDate: order.orderDate,
             collectorID: order.collectorID,
+            dealerID: order.dealerID,
             orderedProducts: order.orderedProducts
         })
             .then((response) => {

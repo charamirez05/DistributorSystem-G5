@@ -5,7 +5,9 @@ import CardActions from '@mui/material/CardActions';
 import { Autocomplete, Button, Card, TextField, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { IEmployee, useRest } from '../../restCalls/employeeUseRest';
+import { IDealer} from '../../restCalls/dealerUseRest';
 import { IOrder } from '../../restCalls/orderUseRest';
+
 import axios from 'axios';
 
 // --Column / data headers for Collector Assignment
@@ -65,13 +67,14 @@ const collectorName = [
 export default function DataGridOrder() {
 
   const [collectors, setCollectors] = useState<IEmployee[]>([]);
+  const [dealers,setDealers]= useState<IDealer[]>([]);
   const [orders, setOrders] = useState<IOrder[]>([]);
   const [getCollectorByID, collector] = useRest();
 
   useEffect(() => {
     getAllCollectors();
     getAllOrders();
-
+    getAllDealers();
   }, []);
 
   function getAllCollectors() {
@@ -84,6 +87,18 @@ export default function DataGridOrder() {
         console.error('Error retrieving collectors:', error);
         alert("Error retrieving collectors. Please try again.");
       });
+  }
+
+  function getAllDealers(){
+    axios.get<IDealer[]>('http://localhost:3000/dealer/getAllDealers')
+    .then((response) => {
+      setDealers(response.data);
+      //console.log(response.data);
+    })
+    .catch((error) => {
+      console.error('Error retrieving dealers:', error);
+      alert("Error retrieving dealers. Please try again.");
+    });
   }
 
   function getAllOrders() {
@@ -99,6 +114,7 @@ export default function DataGridOrder() {
   }
 
   const columns = [
+
     { field: 'dealerName', headerName: 'Dealer Name', width: 300 },
     { field: 'orderAmount', headerName: 'Order Amount', width: 300 },
     { field: 'collectorStatus', headerName: 'Collector Status', width: 300 },
@@ -107,10 +123,11 @@ export default function DataGridOrder() {
 
   const rows = orders.map((order, index) => {
     const foundCollector = collectors.find(employee => employee.employeeID === order.collectorID);
+    const foundDealer = dealers.find(dealer=>dealer.dealerID=== order.orderID);
   
     return {
       id: index + 1,
-      dealerName: 'John Jacob Jingleheimer Schimdt',
+      dealerName: foundDealer ? `${foundDealer.dealerFName} ${foundDealer.dealerLName}` : '',
       orderAmount: order.orderAmount,
       collectorStatus: order.collectorID !== null
         ? 'Assigned'
