@@ -1,66 +1,26 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridRowId, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowId, GridValueGetterParams, GridRowParams, GridApi } from '@mui/x-data-grid';
 import CardActions from '@mui/material/CardActions';
 import { Autocomplete, Button, Card, TextField, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { IEmployee, useRest } from '../../restCalls/employeeUseRest';
+
 import { IDealer} from '../../restCalls/dealerUseRest';
+import { useEffect, useRef, useState } from 'react';
+import { IEmployee } from '../../restCalls/employeeUseRest';
+import { useRest } from '../../restCalls/collectorAssignmentUseRest';
 import { IOrder } from '../../restCalls/orderUseRest';
 
 import axios from 'axios';
+import { GridApiCommunity } from '@mui/x-data-grid/internals';
 
 // --Column / data headers for Collector Assignment
-const columns: GridColDef[] = [
-  { field: 'id', headerName: 'Order Transaction ID#', width: 200 },
-  {
-    field: 'dealerName',
-    headerName: 'Dealer Name',
-    width: 250,
-    editable: false,
-
-  },
-  {
-    field: 'dateDue',
-    headerName: 'Payment Due Date',
-    width: 200,
-    editable: false,
-  },
-
-  {
-    field: 'amountDue',
-    headerName: 'Amount Due',
-    width: 200,
-    editable: false,
-  },
-  {
-    field: 'collectorStatus',
-    headerName: 'Collector Status',
-    width: 250,
-    editable: false
-  },
-
-  {
-    field: 'collectorName',
-    headerName: 'Collector Name',
-    sortable: true,
-    width: 250,
-    // valueGetter: (params: GridValueGetterParams) =>
-    //  `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  },
-];
 
 // --Temporary Records for Collector Assignment
 
 
 
 //Auto Completion or combo box for Assigning a collector    
-const collectorName = [
-  { label: 'Cherry Gil', id: 1 },
-  { label: 'Gardo Versoza', id: 2 },
-  { label: 'Jose Legazpi', id: 3 },
-  { label: 'Maria Gomez', id: 4 }
-];
+
 
 
 //DataGrid Function 
@@ -69,7 +29,8 @@ export default function DataGridOrder() {
   const [collectors, setCollectors] = useState<IEmployee[]>([]);
   const [dealers,setDealers]= useState<IDealer[]>([]);
   const [orders, setOrders] = useState<IOrder[]>([]);
-  const [getCollectorByID, collector] = useRest();
+
+  const [assignCollector, removeCollector, assignedStatus, removeStatus] = useRest();
 
   useEffect(() => {
     getAllCollectors();
@@ -81,7 +42,7 @@ export default function DataGridOrder() {
     axios.get<IEmployee[]>('http://localhost:3000/employee/getAllCollectors')
       .then((response) => {
         setCollectors(response.data);
-        //console.log(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error('Error retrieving collectors:', error);
@@ -115,6 +76,7 @@ export default function DataGridOrder() {
 
   const columns = [
 
+    { field: 'orderID', headerName: 'Order ID', width: 300 },
     { field: 'dealerName', headerName: 'Dealer Name', width: 300 },
     { field: 'orderAmount', headerName: 'Order Amount', width: 300 },
     { field: 'collectorStatus', headerName: 'Collector Status', width: 300 },
@@ -123,11 +85,17 @@ export default function DataGridOrder() {
 
   const rows = orders.map((order, index) => {
     const foundCollector = collectors.find(employee => employee.employeeID === order.collectorID);
+
     const foundDealer = dealers.find(dealer=>dealer.dealerID=== order.orderID);
   
     return {
       id: index + 1,
       dealerName: foundDealer ? `${foundDealer.dealerFName} ${foundDealer.dealerLName}` : '',
+
+    return {
+      id: order.orderID,
+      orderID: order.orderID,
+      dealerName: 'John Jacob Jingleheimer Schimdt',
       orderAmount: order.orderAmount,
       collectorStatus: order.collectorID !== null
         ? 'Assigned'
@@ -137,59 +105,35 @@ export default function DataGridOrder() {
   });
 
 
-  const [selectedCollector, setSelectedCollector] = useState<any>(null); // State for the selected collector
+  const [selectedCollector, setSelectedCollector] = useState<IEmployee>(); // State for the selected collector
   const [selectedCollectorId, setSelectedCollectorId] = useState<number | null>(null); // State for the selected collector ID
   const [selectedRows, setSelectedRows] = useState<number[]>([]); // State for selection of rows 
   //const [rows, setRows] = React.useState(initialRows); // State for grouping order transaction
+  const headerClassName = "custom-header"; // For Header Columns and styling 
   const [groupByValue, setGroupByValue] = useState(''); // // State for the groupBy input value
 
-  const headerClassName = "custom-header"; // For Header Columns and styling
 
-  // Handler for data grid in row selection
-  /* const handleRowSelection = (selectionModel: GridRowId[]) => {
-    const selectedRowIds = selectionModel.map((id) => Number(id));
-    setSelectedRows(selectedRowIds);
-  }; */
+
+
+
 
   // Handler for removing collector Button 
   const handleRemoveCollector = () => {
-    const updatedRows = rows.map((row) => {
-      if (selectedRows.includes(row.id)) {
-        return {
-          ...row,
-          collectorName: '',
-          collectorStatus: 'Not Assigned',
-        };
-      }
-      return row;
-    });
-    //setRows(updatedRows);
-    setSelectedRows([]);
+    removeCollector(1)
   };
 
   // Handler for Assigning Collector Button 
   const handleAssignCollector = () => {
-    if (selectedCollectorId !== null) {
-      const updatedRows = rows.map((row) => {
-        if (selectedRows.includes(row.id)) {
-          return {
-            ...row,
-            collectorName: selectedCollector?.label || '',
-            collectorStatus: 'Assigned',
-          };
-        }
-        return row;
-      });
-      //setRows(updatedRows);
-      setSelectedRows([]);
-    }
+    assignCollector(1, selectedCollector?.employeeID!
+    )
+
   };
   // Handler for Group Transaction Button 
   const handleGroupTransaction = () => {
-    const count = parseInt(groupByValue.trim(), 10);
-    const selectedRowIds = rows.slice(0, count).map((row) => row.id);
-    setSelectedRows(selectedRowIds);
+
   };
+
+
 
   // **Return Statement Here**
   return (
@@ -248,9 +192,10 @@ export default function DataGridOrder() {
                 size="small"
                 value={selectedCollector}
                 onChange={(event, newValue) => {
-                  setSelectedCollector(newValue); // update the selected collector
-                  setSelectedCollectorId(newValue?.id || null); // update the selected collector ID
+                  setSelectedCollector(newValue!); // 
                 }}
+
+
                 // ...
                 sx={{ width: 150, maxHeight: '200px', fontSize: '30px', margin: '0px 0px 0px 0px' }}
                 renderInput={
@@ -312,6 +257,8 @@ export default function DataGridOrder() {
               headerClassName,
             }))
             }
+            pageSizeOptions={[5]}
+            checkboxSelection
             initialState={{
               pagination: {
                 paginationModel: {
@@ -319,11 +266,7 @@ export default function DataGridOrder() {
                 },
               },
             }}
-            pageSizeOptions={[5]}
-            checkboxSelection
-            //onRowSelectionModelChange={(handleRowSelection)}
-            rowSelectionModel={selectedRows}
-          //disableRowSelectionOnClick
+
           />
         </Box>
 
