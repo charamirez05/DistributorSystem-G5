@@ -35,8 +35,10 @@ app.get('/employee/getAllCollectors', employeeController.getAllCollectors)
 app.get('/employee/getCollector/:employeeID', employeeController.getCollectorByID)
 
 
-app.post('/collectorAssignment/assign', collectorAssignmentController.assignCollector);
-app.post('/collectorAssignment/unassign', collectorAssignmentController.removeCollector);
+app.put('/collectorAssignment/assign', collectorAssignmentController.assignCollector);
+app.put('/collectorAssignment/unassign', collectorAssignmentController.removeCollector);
+
+
 
 // Sync the database and start the server
 sequelize
