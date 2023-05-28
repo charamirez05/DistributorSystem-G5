@@ -200,7 +200,7 @@ export default function DataGridOrder() {
   // **Return Statement Here**
   return (
     <Box sx={{ height: 400, width: '100%', color: '#146C94' }}>
-      <Card sx={{ height: 550, margin: "10px 0px 20px 0px", borderRadius: "25px" }}>
+      <Card sx={{ height: 600, margin: "10px 10px 20px 10px", borderRadius: "25px" }}>
         <div style={{ display: "flex", flexDirection: "row" }}>
           <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}>
             {/* Typography-Group Transactions */}
@@ -312,7 +312,7 @@ export default function DataGridOrder() {
         <Box sx={{ height: '100%', marginTop: '20px' }}>
           <DataGrid
             rows={rows}
-            sx={{ textAlign: 'center', color: '#146C94', height: '300px' }}
+            sx={{ textAlign: 'center', color: '#146C94', height: '490px' }}
             columns={columns.map((column) => ({
               ...column,
               headerClassName,
@@ -321,7 +321,7 @@ export default function DataGridOrder() {
             initialState={{
               pagination: {
                 paginationModel: {
-                  pageSize: 5,
+                  pageSize: 10,
                 },
               },
             }}

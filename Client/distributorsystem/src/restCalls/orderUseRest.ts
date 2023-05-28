@@ -42,7 +42,6 @@ export const useRest = (): [(order: IOrder) => void, IOrder | undefined] => {
             paymentTerms: order.paymentTerms,
             orderDate: order.orderDate,
             orderedProducts: order.orderedProducts,
-            collectorID: order.collectorID,
             dealerID: order.dealerID,
  
         })
