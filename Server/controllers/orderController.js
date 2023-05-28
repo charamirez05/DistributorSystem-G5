@@ -1,6 +1,7 @@
 const Order = require('../models/Order');
 const OrderedProduct = require('../models/orderedProduct')
 const Product = require('../models/Product')
+const Dealer= require('../models/Dealer')
 
 const createOrder = async (req, res) => {
   try {
@@ -9,10 +10,11 @@ const createOrder = async (req, res) => {
     const penaltyRate = req.body.penaltyRate;
     const paymentTerms = req.body.paymentTerms;
     const collectorID = req.body.collectorID;
+    const dealerID= req.body.dealerID;
 
     const orderedProducts = req.body.orderedProducts;
 
-    const order = await Order.create({ distributionDate, orderDate, penaltyRate, paymentTerms, collectorID});
+    const order = await Order.create({ distributionDate, orderDate, penaltyRate, paymentTerms, collectorID, dealerID});
 
     const orderID = order.orderID;
 

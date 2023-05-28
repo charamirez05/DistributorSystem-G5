@@ -3,10 +3,13 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridRowId, GridValueGetterParams, GridRowParams, GridApi } from '@mui/x-data-grid';
 import CardActions from '@mui/material/CardActions';
 import { Autocomplete, Button, Card, TextField, Typography } from '@mui/material';
+
+import { IDealer} from '../../restCalls/dealerUseRest';
 import { useEffect, useRef, useState } from 'react';
 import { IEmployee } from '../../restCalls/employeeUseRest';
 import { useRest } from '../../restCalls/collectorAssignmentUseRest';
 import { IOrder } from '../../restCalls/orderUseRest';
+
 import axios from 'axios';
 import { GridApiCommunity } from '@mui/x-data-grid/internals';
 
@@ -24,6 +27,7 @@ import { GridApiCommunity } from '@mui/x-data-grid/internals';
 export default function DataGridOrder() {
 
   const [collectors, setCollectors] = useState<IEmployee[]>([]);
+  const [dealers,setDealers]= useState<IDealer[]>([]);
   const [orders, setOrders] = useState<IOrder[]>([]);
 
   const [assignCollector, removeCollector, assignedStatus, removeStatus] = useRest();
@@ -31,7 +35,7 @@ export default function DataGridOrder() {
   useEffect(() => {
     getAllCollectors();
     getAllOrders();
-
+    getAllDealers();
   }, []);
 
   function getAllCollectors() {
@@ -44,6 +48,18 @@ export default function DataGridOrder() {
         console.error('Error retrieving collectors:', error);
         alert("Error retrieving collectors. Please try again.");
       });
+  }
+
+  function getAllDealers(){
+    axios.get<IDealer[]>('http://localhost:3000/dealer/getAllDealers')
+    .then((response) => {
+      setDealers(response.data);
+      //console.log(response.data);
+    })
+    .catch((error) => {
+      console.error('Error retrieving dealers:', error);
+      alert("Error retrieving dealers. Please try again.");
+    });
   }
 
   function getAllOrders() {
@@ -59,6 +75,7 @@ export default function DataGridOrder() {
   }
 
   const columns = [
+
     { field: 'orderID', headerName: 'Order ID', width: 300 },
     { field: 'dealerName', headerName: 'Dealer Name', width: 300 },
     { field: 'orderAmount', headerName: 'Order Amount', width: 300 },
@@ -68,6 +85,12 @@ export default function DataGridOrder() {
 
   const rows = orders.map((order, index) => {
     const foundCollector = collectors.find(employee => employee.employeeID === order.collectorID);
+
+    const foundDealer = dealers.find(dealer=>dealer.dealerID=== order.orderID);
+  
+    return {
+      id: index + 1,
+      dealerName: foundDealer ? `${foundDealer.dealerFName} ${foundDealer.dealerLName}` : '',
 
     return {
       id: order.orderID,
