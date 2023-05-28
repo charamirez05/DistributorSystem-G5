@@ -235,7 +235,7 @@ export default function DataGridOrder() {
                 value={selectedCollector}
                 onChange={(event, newValue) => {
                   setSelectedCollector(newValue); // update the selected collector
-                  setSelectedCollectorId(newValue?.id || null); // update the selected collector ID
+                  setSelectedCollectorId(newValue?.id || null); console.log(selectedCollector)// update the selected collector ID
                 }}
                 // ...
                 sx={{ width: 150, maxHeight: '200px', fontSize: '30px', margin: '0px 0px 0px 0px' }}
