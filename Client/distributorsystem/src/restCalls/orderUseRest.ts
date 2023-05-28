@@ -15,9 +15,9 @@ export interface IOrder {
     penaltyRate: number,
     paymentTerms: string,
     orderAmount:number,
-    orderedProducts: IOrderedProducts[],
     collectorID: number,
-    dealerID: number
+    dealerID: number,
+    orderedProducts: IOrderedProducts[],
 }
 
 
@@ -26,7 +26,7 @@ export interface IProduct {
     commissionRate: number;
     productName: string;
     productPrice: number;
-    productUnit: number;
+    productUnit: string;
 }
 
 
@@ -41,9 +41,10 @@ export const useRest = (): [(order: IOrder) => void, IOrder | undefined] => {
             penaltyRate: order.penaltyRate,
             paymentTerms: order.paymentTerms,
             orderDate: order.orderDate,
+            orderedProducts: order.orderedProducts,
             collectorID: order.collectorID,
             dealerID: order.dealerID,
-            orderedProducts: order.orderedProducts
+ 
         })
             .then((response) => {
                 console.log(response.data);

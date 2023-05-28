@@ -23,12 +23,17 @@ app.use(cors());
 // Set up your API routes
 app.post('/orders', orderController.createOrder);
 app.get('/orders/getAllOrders', orderController.getAllOrders);
+
+
 app.post('/dealer/registerDealer',dealerController.registerDealer);
 app.get('/dealer/getAllDealers',dealerController.getAllDealers);
 app.get('/dealer/getDealer/:dealerID',dealerController.getDealerByID);
+
 app.post('/products', productController.createProduct);
 app.get('/products/getAllProducts', productController.getAllProducts);
 app.post('/orderedProduct', orderedProductController.createOrderedProduct);
+
+
 app.post('/employee', employeeController.createEmployee);
 app.get('/employee/getAllEmployees', employeeController.getAllEmployees);
 app.get('/employee/getAllCollectors', employeeController.getAllCollectors);

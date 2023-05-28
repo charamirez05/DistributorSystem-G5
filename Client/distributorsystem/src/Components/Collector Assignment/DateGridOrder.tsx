@@ -11,7 +11,7 @@ import { useRest } from '../../restCalls/collectorAssignmentUseRest';
 import { IOrder } from '../../restCalls/orderUseRest';
 
 import axios from 'axios';
-import { GridApiCommunity } from '@mui/x-data-grid/internals';
+
 
 // --Column / data headers for Collector Assignment
 
@@ -36,6 +36,8 @@ export default function DataGridOrder() {
     getAllCollectors();
     getAllOrders();
     getAllDealers();
+    getAllDealers();
+
   }, []);
 
   function getAllCollectors() {
@@ -74,6 +76,7 @@ export default function DataGridOrder() {
       });
   }
 
+
   const columns = [
 
     { field: 'orderID', headerName: 'Order ID', width: 300 },
@@ -86,20 +89,16 @@ export default function DataGridOrder() {
   const rows = orders.map((order, index) => {
     const foundCollector = collectors.find(employee => employee.employeeID === order.collectorID);
 
-    const foundDealer = dealers.find(dealer=>dealer.dealerID=== order.orderID);
+    const foundDealer = dealers.find(dealer=>dealer.dealerID=== order.dealerID);
   
     return {
       id: index + 1,
-      dealerName: foundDealer ? `${foundDealer.dealerFName} ${foundDealer.dealerLName}` : '',
-
-    return {
-      id: order.orderID,
       orderID: order.orderID,
-      dealerName: 'John Jacob Jingleheimer Schimdt',
+      dealerName: foundDealer ? `${foundDealer.dealerFName} ${foundDealer.dealerLName}` : '',
       orderAmount: order.orderAmount,
       collectorStatus: order.collectorID !== null
-        ? 'Assigned'
-        : 'Not Assigned',
+      ? 'Assigned'
+      : 'Not Assigned',
       collectorName: foundCollector ? `${foundCollector.employeeFName} ${foundCollector.employeeLName}` : '',
     };
   });

@@ -24,7 +24,7 @@ const rows = [
   createData(5, 'piece', 'Conditioner (20 mL)', 500, 9, 2750),
 ];
 
- 
+
 const StyledProductTextField = styled(TextField)({
   backgroundColor: "#AFD3E2", borderRadius: "22px", input: {
     padding: "10px", color: "black"
@@ -44,7 +44,9 @@ const StyledTextField = styled(TextField)({
 
 export default function DistributorOrderForm() {
 
-  const [newOrder, order, ] = useRest();
+  const [tableData, setTableData] = useState<{ quantity:number; productName: string; productPrice: number; productUnit: string; productCommissionRate: number; productAmount: number; }[]>([]);
+
+  const [newOrder, order,] = useRest();
 
   const [products, setProducts] = useState<IProduct[]>([]);
 
@@ -54,9 +56,14 @@ export default function DistributorOrderForm() {
 
   const [paymentTerm, setPaymentTerm] = useState(0);
 
+  const [totalAmount, setTotalAmount] = useState(0);
+
+
+
   const quantityRef = useRef<TextFieldProps>(null)
   const distributionDateRef = useRef<TextFieldProps>(null)
   const penaltyRateRef = useRef<TextFieldProps>(null)
+  const dealerIDRef = useRef<TextFieldProps>(null)
 
   function createOrderedProduct(productId: number, quantity: number): IOrderedProducts {
     return {
@@ -82,6 +89,39 @@ export default function DistributorOrderForm() {
       });
   }
 
+
+  const handleAddProduct = () => {
+    const value = quantityRef.current?.value;
+   
+    if (chosenProduct) {
+      const quantity = parseInt(value as string);
+      const productAmount = quantity * chosenProduct.productPrice;
+      const newTableData = [...tableData, {
+        quantity: parseInt(value as string),
+        productName: chosenProduct.productName,
+        productPrice: chosenProduct.productPrice,
+        productUnit: chosenProduct.productUnit,
+        productCommissionRate: chosenProduct.commissionRate,
+        productAmount: productAmount
+      }];
+      const updatedTotalAmount = newTableData.reduce((sum, product) => sum + product.productAmount, 0);
+      setTotalAmount(updatedTotalAmount);
+
+      setTableData(newTableData);
+    }
+  };
+
+  const handleRemoveLastProduct = () => {
+    const lastProduct = tableData[tableData.length - 1];
+    const lastProductAmount = lastProduct.productAmount;
+
+    setTableData(tableData.slice(0, -1));
+    setTotalAmount(totalAmount - lastProductAmount);
+
+    setOrderedProducts(orderedProducts.slice(0, -1));
+  };
+
+
   return (
     <>
       <div>
@@ -90,7 +130,7 @@ export default function DistributorOrderForm() {
           <Grid container spacing={4} sx={{ display: "flex", justifyContent: "center" }}>
             <Grid item>
               <Typography sx={{ color: "white" }}>Dealer ID</Typography>
-              <StyledTextField id="standard-basic" variant="standard" InputProps={{ disableUnderline: true }} />
+              <StyledTextField id="standard-basic" variant="standard" InputProps={{ disableUnderline: true }} inputRef={dealerIDRef} />
             </Grid>
             <Grid item>
               <Typography sx={{ color: "white" }}>Distribution Date</Typography>
@@ -147,12 +187,12 @@ export default function DistributorOrderForm() {
                   <StyledProductTextField id="standard-basic" variant="standard" InputProps={{ disableUnderline: true }} inputRef={quantityRef} />
                 </Grid>
                 <Grid item>
-                  <Button variant='contained' style={{ maxWidth: '200px', maxHeight: '50px', minWidth: '200px', minHeight: '50px', borderRadius: 20, background: "#2A9221" }} onClick={() => setOrderedProducts([...orderedProducts, createOrderedProduct(chosenProduct!.productID, Number(quantityRef.current?.value))])}>Add to Cart</Button>
+                  <Button variant='contained' style={{ maxWidth: '200px', maxHeight: '50px', minWidth: '200px', minHeight: '50px', borderRadius: 20, background: "#2A9221" }} onClick={() => {handleAddProduct(); setOrderedProducts([...orderedProducts, createOrderedProduct(chosenProduct!.productID, Number(quantityRef.current?.value))]);}}>Add to Cart</Button>
 
 
                   <Box sx={{ m: 3 }} />
                   <Button variant='contained' style={{ maxWidth: '200px', maxHeight: '50px', minWidth: '200px', minHeight: '50px', borderRadius: 20, background: "#E77D7D" }}
-                    onClick={() => { console.log(orderedProducts); console.log(paymentTerm) }}>Remove Item</Button>
+                    onClick={() => { handleRemoveLastProduct(); }}>Remove Item</Button>
                 </Grid>
               </Grid>
             </Card>
@@ -172,21 +212,22 @@ export default function DistributorOrderForm() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row) => (
+                  {tableData.map((row) => (
                     <TableRow
 
                     >
                       <TableCell align='center' sx={{ color: "#156D94", borderRight: "3px #AFD3E2 solid" }} >{row.quantity}</TableCell>
-                      <TableCell align='center' sx={{ color: "#156D94", borderRight: "3px #AFD3E2 solid" }}>{row.unit}</TableCell>
+                      <TableCell align='center' sx={{ color: "#156D94", borderRight: "3px #AFD3E2 solid" }}>{row.productUnit}</TableCell>
                       <TableCell align='center' sx={{ color: "#156D94", borderRight: "3px #AFD3E2 solid" }}>{row.productName}</TableCell>
-                      <TableCell align='center' sx={{ color: "#156D94", borderRight: "3px #AFD3E2 solid" }}>{row.unitPrice}</TableCell>
-                      <TableCell align='center' sx={{ color: "#156D94", borderRight: "3px #AFD3E2 solid" }}>{row.commissionRate}</TableCell>
-                      <TableCell align='center' sx={{ color: "#156D94", borderRight: "3px #AFD3E2 solid" }}>{row.amount}</TableCell>
+                      <TableCell align='center' sx={{ color: "#156D94", borderRight: "3px #AFD3E2 solid" }}>{row.productPrice}</TableCell>
+                      <TableCell align='center' sx={{ color: "#156D94", borderRight: "3px #AFD3E2 solid" }}>{row.productCommissionRate}</TableCell>
+                      <TableCell align='center' sx={{ color: "#156D94", borderRight: "3px #AFD3E2 solid" }}>{row.productAmount}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
             </TableContainer>
+
 
 
             <Box sx={{ m: 0.5 }} />
@@ -195,30 +236,32 @@ export default function DistributorOrderForm() {
                 <Typography align='center' sx={{ color: "white", fontWeight: "bold", padding: 0.5 }}>Total Amount: </Typography>
               </Grid>
               <Grid item>
-                <Typography align='center' sx={{ color: "#156D94", background: "white", width: 75, padding: 0.3, borderRadius: 1 }}>20,210</Typography>
+                <Typography align='center' sx={{ color: "#156D94", background: "white", width: 75, padding: 0.3, borderRadius: 1 }}>{totalAmount}</Typography>
               </Grid>
             </Grid>
           </div>
           <Box sx={{ m: 3 }} />
           <Box textAlign='center'>
             <Button variant='contained' sx={{ background: "#AFD3E2", color: "#146C94", fontSize: 20, paddingLeft: 6, paddingRight: 6, fontWeight: 'bold', borderRadius: 5 }}
-            onClick={() => {
-              newOrder(
-                { 
-                  orderID:-1,
-                  distributionDate: distributionDateRef.current?.value+"", 
-                  orderDate: "asdfghh", 
-                  penaltyRate: Number(penaltyRateRef.current?.value), 
-                  paymentTerms: paymentTerm+"", 
-                  orderAmount:0,
-                  collectorID:-1, 
-                  orderedProducts: orderedProducts,
-                  dealerID:1,
-                }
-              )}}>Save</Button>
-        </Box>
-      </div>
-    </div >
+              onClick={() => {
+                newOrder(
+                  {
+                    orderID: -1,
+                    distributionDate: distributionDateRef.current?.value + "",
+                    orderDate: "asdfghh",
+                    penaltyRate: Number(penaltyRateRef.current?.value),
+                    paymentTerms: paymentTerm + "",
+                    orderAmount: 0,
+                    collectorID: -1,
+                    dealerID: Number(dealerIDRef.current?.value),
+                    orderedProducts: orderedProducts,
+                    
+                  }
+                )
+              }}>Save</Button>
+          </Box>
+        </div>
+      </div >
     </>
   );
 
