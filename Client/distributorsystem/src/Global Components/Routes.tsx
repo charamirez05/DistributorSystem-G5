@@ -9,6 +9,7 @@ import PaymentList from "../Components/Payments/PaymentList";
 // import EmployeeProfileList from "./Components/Profiles/EmployeeProfiles/EmployeeProfileList";
 import DealerRegistration from "../Components/Registration/DealerRegistration";
 import EmployeeRegistration from "../Components/Registration/EmployeeRegistration";
+import ScheduleOrderTransaction from "../Components/Schedules/ScheduleOrderTransaction";
 import Schedules from "../Components/Schedules/ScheduleOrderTransaction";
 import DistributorOrderForm from "../Components/Product Distribution/DistributorOrderForm";
 import DealerOrderForm from "../Components/Product Distribution/DealerOrderForm";
@@ -19,6 +20,7 @@ import OrderConfirmation from "../Components/Product Distribution/OrderConfirmar
 import RecordDirectPayment from "../Components/Payments/RecordDirectPayment";
 import Content from "./Contents";
 import DataGridOrder from "../Components/Collector Assignment/DateGridOrder";
+
 export default function MainRoutes(){
     return(
         <Routes>

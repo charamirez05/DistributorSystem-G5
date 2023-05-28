@@ -8,11 +8,11 @@ const createOrder = async (req, res) => {
     const orderDate = req.body.orderDate;
     const penaltyRate = req.body.penaltyRate;
     const paymentTerms = req.body.paymentTerms;
-    const collectorStatus = req.body.collectorStatus;
+    const collectorID = req.body.collectorID;
 
     const orderedProducts = req.body.orderedProducts;
 
-    const order = await Order.create({ distributionDate, orderDate, penaltyRate, paymentTerms});
+    const order = await Order.create({ distributionDate, orderDate, penaltyRate, paymentTerms, collectorID});
 
     const orderID = order.orderID;
 
@@ -27,6 +27,7 @@ const createOrder = async (req, res) => {
       if (product) {
         const productPrice = product.productPrice;
         const productUnit = product.productUnit;
+        const commissionRate = product.commissionRate;
         const subTotal = productPrice * quantity;
     
         const orderedProduct = await OrderedProduct.create({
@@ -36,7 +37,7 @@ const createOrder = async (req, res) => {
           orderID,
         });
         
-        orderAmount += subTotal; //dili mogana ang subTotal
+        orderAmount += subTotal; 
       }
     }
     
@@ -48,6 +49,17 @@ const createOrder = async (req, res) => {
   }
 };
 
+const getAllOrders = async (req, res) => {
+  try {
+    const orders = await Order.findAll();
+    
+    res.json(orders);
+  } catch (error) {
+    console.error('Error retrieving orders:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 module.exports = {
-  createOrder,
+  createOrder, getAllOrders
 };

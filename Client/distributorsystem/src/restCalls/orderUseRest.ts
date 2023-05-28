@@ -2,54 +2,46 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 
 
-/* export interface IOrder {
-    id: number,
-    distributionDate: string;
-    penaltyRate: string;
-    paymentTerms: string;
-} */
 
 export interface IOrderedProducts {
     productID: number;
     quantity: number;
-  }
-  
-  interface IOrder {
-    distributionDate: string;
-    orderDate: string;
-    penaltyRate: number;
-    paymentTerms: string;
-    collectorStatus: string;
-    orderedProducts: IOrderedProducts[];
-  }
+}
+
+export interface IOrder {
+    orderID: number,
+    distributionDate: string,
+    orderDate: string,
+    penaltyRate: number,
+    paymentTerms: string,
+    orderAmount:number,
+    orderedProducts: IOrderedProducts[],
+    collectorID: number
+}
 
 
 export interface IProduct {
     productID: number;
-    commissionRate: string;
+    commissionRate: number;
     productName: string;
-    productPrice: string;
-    productUnit: string;
+    productPrice: number;
+    productUnit: number;
 }
-  
+
 
 
 export const useRest = (): [(order: IOrder) => void, IOrder | undefined] => {
 
     const [order, setOrder] = useState<IOrder>();
 
-    const [orderedProducts, setOrderedProducts] = useState<IOrderedProducts[]>([]);
-
     function newOrder(order: IOrder) {
         axios.post('http://localhost:3000/orders/', {
             distributionDate: order.distributionDate,
-            penaltyRate: 5,
+            penaltyRate: order.penaltyRate,
             paymentTerms: order.paymentTerms,
             orderDate: order.orderDate,
-            collectorStatus: order.collectorStatus,
+            collectorID: order.collectorID,
             orderedProducts: order.orderedProducts
-
-           
         })
             .then((response) => {
                 console.log(response.data);

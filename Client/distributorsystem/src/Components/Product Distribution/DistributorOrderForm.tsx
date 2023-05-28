@@ -41,17 +41,6 @@ const StyledTextField = styled(TextField)({
 
 });
 
-const StyledTyporaphy = styled(Typography)({
-  position: 'relative',
-  backgroundColor: '#146C94',
-  textAlign: 'left',
-  color: '#146C94',
-  fontSize: '12px',
-  right: '10px',
-  top: '6px',
-  fontFamily: 'Inter, sans - serif',
-});
-
 
 export default function DistributorOrderForm() {
 
@@ -92,7 +81,6 @@ export default function DistributorOrderForm() {
         alert("Error retrieving products. Please try again.");
       });
   }
-
 
   return (
     <>
@@ -199,6 +187,8 @@ export default function DistributorOrderForm() {
                 </TableBody>
               </Table>
             </TableContainer>
+
+
             <Box sx={{ m: 0.5 }} />
             <Grid container spacing={2} sx={{ justifyContent: "right" }}>
               <Grid item>
@@ -215,10 +205,13 @@ export default function DistributorOrderForm() {
             onClick={() => {
               newOrder(
                 { 
-                  distributionDate: distributionDateRef.current?.value+"", orderDate: "asdfghh", 
+                  orderID:-1,
+                  distributionDate: distributionDateRef.current?.value+"", 
+                  orderDate: "asdfghh", 
                   penaltyRate: Number(penaltyRateRef.current?.value), 
                   paymentTerms: paymentTerm+"", 
-                  collectorStatus: "", 
+                  orderAmount:0,
+                  collectorID:-1, 
                   orderedProducts: orderedProducts
                 }
               )}}>Save</Button>
