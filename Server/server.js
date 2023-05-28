@@ -8,6 +8,8 @@ const orderController = require('./controllers/orderController');
 const productController = require('./controllers/productController');
 const orderedProductController = require('./controllers/orderedProductController');
 const employeeController = require('./controllers/employeeController');
+const collectorAssignmentController = require('./controllers/collectorAssignmentController');
+
 
 const app = express();
 app.use(express.json());
@@ -31,6 +33,10 @@ app.post('/employee', employeeController.createEmployee);
 app.get('/employee/getAllEmployees', employeeController.getAllEmployees)
 app.get('/employee/getAllCollectors', employeeController.getAllCollectors)
 app.get('/employee/getCollector/:employeeID', employeeController.getCollectorByID)
+
+
+app.put('/collectorAssignment/assign', collectorAssignmentController.assignCollector);
+app.put('/collectorAssignment/unassign', collectorAssignmentController.removeCollector);
 
 
 
