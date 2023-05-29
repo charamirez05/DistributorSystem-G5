@@ -2,7 +2,7 @@ import NavBar from "../../Global Components/NavBar";
 import Typography  from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 import SearchIcon from '@mui/icons-material/Search';
-import { Button, Card, TextField, InputAdornment, TableContainer, Table, TableHead, Paper, TableRow, TableCell, TableBody, Box} from '@mui/material';
+import { Button, Card, TextField, InputAdornment, TableContainer, Table, TableHead, Paper, TableRow, TableCell, TableBody, Box, Container} from '@mui/material';
 import styled from "@emotion/styled";
 
 const StyledButton = styled(Button)({
@@ -51,32 +51,35 @@ const StyledTextField = styled(TextField)(() => ({
 ));
 
 const StyledCard = styled(Card)({
+    justifyContent: "center",
+    position: "absolute",
     borderRadius: "20px",
     padding: 1,
     width: 700,
-    position: "relative",
-    marginLeft: "350px",
-    marginTop: "25px"
+    marginLeft: "250px",
+    marginTop: "-250px"
 });
 
 const StyledOrderTransactionCard = styled(Card)({
+    justifyContent: "center",
+    position: "absolute",
     borderRadius: "20px",
     padding: 1,
     width: 1000,
     height: 150,
-    position: "relative",
-    marginLeft: "200px",
-    marginTop: "10px"
+    marginLeft: "100px",
+    marginTop: "-150px"
 });
 
 const StyledPaymentTransactionCard = styled(Card)({
+    justifyContent: "center",
+    position: "absolute",
     borderRadius: "20px",
     padding: 1,
     width: 1000,
     height: 300,
-    position: "relative",
-    marginLeft: "200px",
-    marginTop: "10px"
+    marginLeft: "100px",
+    marginTop: "20px"
 });
 
 const StyledTypography = styled(Typography)({
@@ -101,10 +104,14 @@ const TableHeaderCell = styled(TableCell)({
     fontWeight: "bold"
 });
 
+const StyledContainer = styled(Container)({
+    justifyContent: "center"
+});
+
 export default function Schedules(){
     return( 
         <div>
-
+            <StyledContainer>
             <StyledCard>
                 <CardContent>
                     <StyledTypography sx={{marginTop: "15px", marginBottom: "-40px", marginLeft: "-400px"}}>
@@ -180,15 +187,19 @@ export default function Schedules(){
                     </TableContainer>
                 </CardContent>
             </StyledPaymentTransactionCard>
-            <Box sx = {{marginTop: "10px", marginRight: "150px"}} textAlign = 'center'>
-                <StyledBottomButton sx = {{'&:hover': {
+            <Box sx = {{marginTop: "300px", marginRight: "200px"}} textAlign = 'center'>
+                <StyledBottomButton sx = {{
+                    '&:hover': {
                     backgroundColor: '#FFFFFF',
                     color: '#000000'
-                }}} 
+                    },
+                    marginTop: "350px",
+                }} 
                 onClick = {() => {
                     
                 }}>Edit</StyledBottomButton>
             </Box>
+            </StyledContainer>
         </div>
     );
 }

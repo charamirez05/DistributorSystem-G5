@@ -1,7 +1,7 @@
 import NavBar from "../../Global Components/NavBar";
 import Typography  from '@mui/material/Typography';
 import styled from "@emotion/styled";
-import { Stack, Card, CardContent, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Button } from '@mui/material';
+import { Stack, Card, CardContent, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Button, Container } from '@mui/material';
 import { Link } from "react-router-dom";
 
 const StyledHeaderTypography = styled(Typography)({
@@ -46,7 +46,7 @@ const StyledAssignedHeader = styled(Typography)({
     color: "#FFFFFF",
     fontSize: 20,
     marginTop: "300px",
-    marginLeft: "850px"
+    marginLeft: "830px"
 });
 
 
@@ -74,10 +74,9 @@ const FieldData = styled(Typography)({
 
 const StyledCard = styled(Card)({
     borderRadius: "20px",
-    padding: 1,
     width: 1000,
     position: "absolute",
-    marginLeft: "130px",
+    marginLeft: "100px",
     marginTop: "340px"
 });
 
@@ -91,47 +90,50 @@ const TableHeaderCell = styled(TableCell)({
     fontWeight: "bold"
 });
 
-
 const RedirectButton = styled(Button)({
-    position: "absolute",
     align: "center",
     color: "#FFFFFF",
+    marginLeft: "30px",
     marginTop: "500px",
-    marginLeft: "-280px"
+});
+
+const StyledContainer = styled(Container)({
+    justifyContent: "center"
 });
 
 export default function PaymentTransactionDetails() {
     return(
         <div>
+            <StyledContainer>
             <StyledHeaderTypography>Order Transaction Details</StyledHeaderTypography>
             <StyledDealerHeader>Dealer Contact Information</StyledDealerHeader>
-            <Stack sx = {{position: 'absolute', top: '180px', left: '70px'}}>
+            <Stack sx = {{position: 'relative', top: '120px', left: '70px'}}>
                 <FieldLabel>Dealer Name</FieldLabel>
                 <FieldData>John Doe</FieldData>
             </Stack>
-            <Stack sx = {{position: 'absolute', top: '180px', left: '230px'}}>
+            <Stack sx = {{position: 'relative', top: '120px', left: '230px'}}>
                 <FieldLabel>Dealer ID</FieldLabel>
                 <FieldData>A15-X101</FieldData>
             </Stack>
-            <Stack sx = {{position: 'absolute', top: '180px', left: '370px'}}>
+            <Stack sx = {{position: 'relative', top: '120px', left: '370px'}}>
                 <FieldLabel>Contact Number</FieldLabel>
                 <FieldData>09123456789</FieldData>
             </Stack>
-            <Stack sx = {{position: 'absolute', top: '180px', left: '570px'}}>
+            <Stack sx = {{position: 'relative', top: '120px', left: '570px'}}>
                 <FieldLabel>Address</FieldLabel>
                 <FieldData>306 St. Cypa , Englis V.Rama Cebu City, Cebu</FieldData>
             </Stack>
 
             <StyledOrderHeader>Order Transaction Information</StyledOrderHeader>
-            <Stack sx = {{position: 'absolute', top: '300px', left: '70px'}}>
+            <Stack sx = {{position: 'relative', top: '240px', left: '70px'}}>
                 <FieldLabel>Order Transaction ID</FieldLabel>
                 <FieldData>45AhZh</FieldData>
             </Stack>
-            <Stack sx = {{position: 'absolute', top: '300px', left: '280px'}}>
+            <Stack sx = {{position: 'relative', top: '240px', left: '280px'}}>
                 <FieldLabel>Order Transaction Date</FieldLabel>
                 <FieldData>May 11, 2023</FieldData>
             </Stack>
-            <Stack sx = {{position: 'absolute', top: '300px', left: '500px'}}>
+            <Stack sx = {{position: 'relative', top: '240px', left: '500px'}}>
                 <FieldLabel>Total Ordered Amount</FieldLabel>
                 <FieldData>Php 10,000</FieldData>
             </Stack>
@@ -165,6 +167,7 @@ export default function PaymentTransactionDetails() {
                 </CardContent>
             </StyledCard>
             <Link to="/schedules"><RedirectButton>View/edit payment transactions in the Scheduling page</RedirectButton></Link>
+            </StyledContainer>
         </div>      
     );
 }
